@@ -27,8 +27,6 @@ pp_get_tags_vector <- function() {
 }
 
 
-# in progress -------------------------------------------------------------
-
 #' Get list of ideas.
 #'
 #' @param tags One or more tag names to filter the ideas by. These act as an OR not AND
@@ -69,8 +67,11 @@ pp_get_ideas <- function(
      ...,
      .unnest_element = "ideas"
   )
-    # %>% hoist(account, "name")
 }
+
+
+# in progress -------------------------------------------------------------
+
 
 #' #' @export
 #' get_idea_feedback <- function(client, id) {

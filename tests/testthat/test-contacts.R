@@ -24,5 +24,8 @@ test_that("get", {
     pp_get_products(), ncol = 13
   )
 
+  expect_tbl(
+    pp_get_ideas()
+  )
 
 })
