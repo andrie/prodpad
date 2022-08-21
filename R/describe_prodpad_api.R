@@ -75,12 +75,22 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
 
   # @params
 
-  params <- this[["parameters"]] %>% as_tibble() %>% select(name, description)
-  z3 <- paste0(
-    glue("#' @param {params$name} {params$description}"),
-    collapse = "\n#'\n",
-    sep = ""
-  )
+  params <- if (is.null(this[["parameters"]])) {
+    NULL
+  } else {
+    this[["parameters"]] %>% as_tibble() %>% select(name, description)
+  }
+
+  z3 <- if (is.null(params)) {
+    NULL
+  } else {
+    paste0(
+      glue("#' @param {params$name} {params$description}"),
+      collapse = "\n#'\n",
+      sep = ""
+    )
+  }
+
 
   dots <- collapse(c(
     "#'",
