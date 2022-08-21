@@ -1,0 +1,152 @@
+---
+title: "ProdPad Tag Roundup"
+output: 
+  html_document:
+    theme: paper
+params:
+  tag:
+    label: "ProdPad Tag"
+    value: "Rough Edge"
+    input: select
+    choices: c("Rough Edge", "Security", "Content Management", "Content Execution", "Content Promotion")
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ``r params$tag`` Tag Report {.tabset}
+
+```{r include=FALSE}
+library(dplyr)
+library(prodpad)
+library(tidyr)
+library(reactable)
+library(purrr)
+
+roughstuff <- pp_get_feedbacks(tags = params$tag, product = "RStudio Connect")
+
+roughstuff %>% 
+  select(id = id, tags) %>% 
+  unnest_tibble(tags)
+
+rsdf <-
+  roughstuff %>% 
+  select(feedback_id = id, feedback, logged = created_at, customer_name, customer_company)
+
+lsdf <- roughstuff %>%
+  select(feedback_id = id, tags) %>%
+  unnest_tibble(tags)
+
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+tags_tbl <-
+  roughstuff %>%
+  select(feedback_id = id, tags) %>%
+  unnest_tibble(tags)
+
+ideas_tbl <- 
+  roughstuff %>%
+  select(feedback_id = id, ideas) %>%
+  unnest_tibble(ideas)
+
+
+get_idea <- function(.x) {
+  pp_get_idea(.x)
+}
+
+
+library(purrr)
+
+ideas_tbl2 <-
+  ideas_tbl %>%
+  mutate(idea = map(ideas_id, possibly(get_idea, NA)))
+
+ideas_tbl3 <-
+  ideas_tbl2 %>%
+  tidyr::hoist(idea, 
+               link = "web_url",
+               title = "title") %>%
+  select(ideas_id, feedback_id, link, title)
+```
+
+### Feedback from the `r params$tag` Tag
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(stringr)
+
+tags_lookup <- function(.data, lid){
+  .data %>% 
+    filter(feedback_id == lid) %>%
+    select(tags_tag)
+}
+
+ideas_lookup <- function(.data, lid){
+  .data %>% 
+    filter(feedback_id == lid) %>%
+    select(title, link)
+}
+
+reactable(
+  rsdf, 
+  details = function(index) {
+    ftags <- tags_lookup(lsdf, rsdf[index,]$feedback_id)
+    reactable(data.frame(ftags), fullWidth = FALSE,
+              columns = list(tags_tag = colDef(name = "Linked Tags", minWidth = 150))
+    )
+  },
+  searchable = T,
+  highlight = T,
+  columns = list(
+    feedback_id = colDef(name = "ID"),
+    feedback = colDef(name = "Feedback", html = T, minWidth = 500, details = function(index){
+      fideas <- ideas_lookup(ideas_tbl3, rsdf[index,]$feedback_id)
+      aid <- str_replace_na(as.vector(fideas$title))
+      paste("Linked Ideas: ", str_c(aid, collapse = ", "))
+    }),
+    logged = colDef(name = "Date", format = colFormat(date = T)),
+    customer_name = colDef(name = "Requester")
+  )
+)
+
+
+```
+
+### Related Tags
+
+ProdPad Feedback is often associated with more than one tag. This summary shows frequency counts for tags that have been used in addition to `r params$tag`.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+reltags <- 
+  plyr::count(lsdf, 'tags_tag') %>%
+  arrange(desc(freq))
+
+reactable(reltags, defaultPageSize = 6, columns = list(
+  tags_tag = colDef(name = "Tag Name"),
+  freq = colDef(name = "Frequency Count")
+))
+```
+
+### Feedback Over Time
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Summary of feedback counts by year and month
+
+library(lubridate)
+
+fcounts <- 
+  rsdf %>%
+  mutate(date = ymd_hms(logged), month = format(date, "%m"), year = format(date, "%Y")) %>%
+  group_by(year, month) %>%
+  tally() %>%
+  arrange(desc(year), desc(month))
+
+reactable(fcounts, defaultPageSize = 6, columns = list(
+  year = colDef(name = "Year"),
+  month = colDef(name = "Month"),
+  n = colDef(name = "Feedback Count")
+))
+```
