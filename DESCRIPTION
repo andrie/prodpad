@@ -20,6 +20,8 @@ Suggests:
     shinycssloaders,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/Needs/website: tidyverse/tidytemplate
 Depends: 
     R (>= 2.10)
 Roxygen: list(markdown = TRUE)
+URL: https://andrie.github.io/prodpad/
