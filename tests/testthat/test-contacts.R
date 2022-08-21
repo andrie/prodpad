@@ -40,4 +40,8 @@ test_that("get", {
     pp_get_contacts(size = 3), nrow = 3, ncol = 14
   )
 
+  expect_tbl(
+    pp_get_personas(), ncol = 7
+  )
+
 })

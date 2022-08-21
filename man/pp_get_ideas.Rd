@@ -32,3 +32,8 @@ pp_get_ideas(
 \description{
 Get list of ideas.
 }
+\seealso{
+Other Ideas: 
+\code{\link{pp_get_idea_feedback}()}
+}
+\concept{Ideas}

@@ -1,5 +1,6 @@
 #' Get tibble of products.
 #'
+#' @family Products
 #' @export
 #' @importFrom dplyr bind_cols select rename select_if
 #' @importFrom purrr map_dfr
@@ -7,12 +8,22 @@ pp_get_products <- function() {
   res <- pp("/products", group = FALSE)
   p <- res$productlines
 
- p %>% map_dfr(~.$products %>% pp_unnest())
+  p %>%
+    map_dfr(~.$products %>% pp_unnest())
+}
 
+#' Get tibble of products.
+#'
+#' @family Products
+#' @export
+pp_get_products_vector <- function() {
+  pp_get_products() %>%
+    get_id_vector()
 }
 
 #' Get tibble of tags.
 #'
+#' @family Tags
 #' @export
 pp_get_tags <- function() {
   pp("/tags", .unnest = TRUE)
@@ -20,6 +31,7 @@ pp_get_tags <- function() {
 
 #' Get vector of tags
 #'
+#' @family Tags
 #' @export
 pp_get_tags_vector <- function() {
   all_tags <- pp_get_tags()
@@ -44,6 +56,7 @@ pp_get_tags_vector <- function() {
 #' @param ... Other arguments passed to [pp()]
 #'
 #' @export
+#' @family Ideas
 #'
 #' @importFrom tidyr hoist
 pp_get_ideas <- function(
@@ -80,6 +93,7 @@ pp_get_ideas <- function(
 #' @param ... Other arguments passed to [pp()]
 #'
 #' @note GET /ideas/{id}/feedback
+#' @family Ideas
 #'
 #' @export
 pp_get_idea_feedback <- function(
@@ -129,6 +143,7 @@ pp_get_idea_feedback <- function(
 #' @param ... Other arguments passed to [pp()]
 #'
 #' @note GET /companies
+#' @family Companies
 #'
 #' @export
 pp_get_companies <- function(
@@ -171,9 +186,8 @@ get_id_vector <- function(x, id = "id", name = "name") {
 
 #' Get named vector of companies.
 #'
-#' @inheritParams pp_get_companies
-#'
 #' @export
+#' @family Companies
 #'
 #' @return Named vector
 pp_get_companies_vector <- function() {
@@ -211,6 +225,7 @@ pp_get_companies_vector <- function() {
 #'
 #' @param ... Other arguments passed to [pp()]
 #'
+#' @family Contacts
 #' @note GET /contacts
 #'
 #' @export
@@ -250,6 +265,7 @@ pp_get_contacts <- function(
 #' Get named vector of contacts
 #'
 #' @export
+#' @family Contacts
 #'
 #' @return Named vector
 pp_get_contacts_vector <- function() {
@@ -259,3 +275,31 @@ pp_get_contacts_vector <- function() {
 
 
 # in progress -------------------------------------------------------------
+
+#' Get tibble of personas.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note GET /personas
+#'
+#' @family Persona
+#' @export
+pp_get_personas <- function(
+    ...
+) {
+  pp("get /personas",
+     ... = ...,
+     .unnest = TRUE
+  )
+}
+
+#' Get named vector of personas.
+#'
+#' @export
+#'
+#' @family Persona
+#' @return Named vector
+pp_get_personas_vector <- function() {
+  pp_get_personas() %>%
+    get_id_vector()
+}

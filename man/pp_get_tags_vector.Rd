@@ -9,3 +9,8 @@ pp_get_tags_vector()
 \description{
 Get vector of tags
 }
+\seealso{
+Other Tags: 
+\code{\link{pp_get_tags}()}
+}
+\concept{Tags}

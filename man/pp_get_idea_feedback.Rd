@@ -17,3 +17,8 @@ Returns a tibble of all the feedback that is associated to the idea. This allows
 \note{
 GET /ideas/{id}/feedback
 }
+\seealso{
+Other Ideas: 
+\code{\link{pp_get_ideas}()}
+}
+\concept{Ideas}

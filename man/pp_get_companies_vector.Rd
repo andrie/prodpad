@@ -12,3 +12,8 @@ Named vector
 \description{
 Get named vector of companies.
 }
+\seealso{
+Other Companies: 
+\code{\link{pp_get_companies}()}
+}
+\concept{Companies}

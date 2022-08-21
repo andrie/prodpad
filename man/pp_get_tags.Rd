@@ -9,3 +9,8 @@ pp_get_tags()
 \description{
 Get tibble of tags.
 }
+\seealso{
+Other Tags: 
+\code{\link{pp_get_tags_vector}()}
+}
+\concept{Tags}

@@ -12,3 +12,8 @@ Named vector
 \description{
 Get named vector of contacts
 }
+\seealso{
+Other Contacts: 
+\code{\link{pp_get_contacts}()}
+}
+\concept{Contacts}

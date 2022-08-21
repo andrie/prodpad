@@ -65,3 +65,8 @@ Get a tibble of all the contacts in the account. This can be used to sync contac
 \note{
 GET /contacts
 }
+\seealso{
+Other Contacts: 
+\code{\link{pp_get_contacts_vector}()}
+}
+\concept{Contacts}

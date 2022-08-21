@@ -55,3 +55,8 @@ Using parameters allows you to also select whether to return feedback associated
 \note{
 GET /companies
 }
+\seealso{
+Other Companies: 
+\code{\link{pp_get_companies_vector}()}
+}
+\concept{Companies}
