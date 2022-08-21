@@ -13,7 +13,7 @@ test_that("get", {
   )
 
   expect_tbl(
-    pp_get_feedback(size = 7), nrow = 7, ncol = 23
+    pp_get_feedbacks(size = 7), nrow = 7, ncol = 23
   )
 
   expect_tbl(
@@ -25,7 +25,11 @@ test_that("get", {
   )
 
   expect_tbl(
-    pp_get_ideas()
+    pp_get_ideas(size = 6), nrow = 6, ncol = 20
+  )
+
+  expect_tbl(
+    pp_get_idea_feedback("633051"), ncol = 23
   )
 
 })

@@ -81,6 +81,31 @@ pp_get_ideas <- function(
 #'   return(rawdat)
 # }
 
+#' Get feedback associated to an idea.
+#'
+#' Returns a tibble of all the feedback that is associated to the idea. This allows you to display the feedback in other apps for a particular idea or sync feedback between ProdPad and other applications.
+#'
+#'
+#' @param id Numeric ID of the idea.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note GET /ideas/{id}/feedback
+#'
+#' @export
+pp_get_idea_feedback <- function(
+    id,
+    ...
+) {
+  pp("/ideas/{id}/feedback",
+     id = id,
+     ... = ...,
+     .unnest = TRUE,
+     .unnest_dont_unlist = c("tags", "products", "personas")
+  )
+}
+
+
 
 
 
