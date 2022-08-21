@@ -2,14 +2,22 @@
 % Please edit documentation in R/describe_prodpad_api.R
 \name{describe_api_path}
 \alias{describe_api_path}
-\title{Describe prodpad API paths.}
+\title{Loads prodpad api from internal data, then construct roxygen and code.}
 \usage{
-describe_api_path()
+describe_api_path(path = "/feedbacks", verb = "get")
+}
+\arguments{
+\item{path}{Prodpad API path, e.g. `/feedbacks`}
+
+\item{verb}{`get`, `post`, etc.}
 }
 \description{
-Describe prodpad API paths.
+Prints result to the console, and copies to the clipboard.
 }
 \examples{
-describe_api_paths()
+describe_api_path("/feedbacks")
+describe_api_path("/ideas")
+describe_api_path("/ideas/{id}")
+
 }
 \keyword{Internal}

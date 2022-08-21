@@ -6,6 +6,9 @@
 \usage{
 describe_api(max.level = 4)
 }
+\arguments{
+\item{max.level}{passed to [str()]}
+}
 \description{
 Describe prodpad API.
 }

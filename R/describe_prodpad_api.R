@@ -13,6 +13,8 @@
 
 #' Describe prodpad API.
 #'
+#' @param max.level passed to [str()]
+#'
 #' @keywords Internal
 #' @examples
 #' describe_api()
@@ -26,22 +28,28 @@ describe_api <- function(max.level = 4) {
 #' @keywords Internal
 #' @examples
 #' describe_api_paths()
-describe_api_path <- function() {
+describe_api_paths <- function() {
   prodpad_api_v1$paths %>%
     purrr::map_dfr(~tibble(verb = names(.)), .id = "path")
 }
 
 
-#' Loads prodpad api from internal data, then construct roxygen and code
+#' Loads prodpad api from internal data, then construct roxygen and code.
+#'
+#' Prints result to the console, and copies to the clipboard.
+#'
+#' @param path Prodpad API path, e.g. `/feedbacks`
+#'
+#' @param verb `get`, `post`, etc.
 #'
 #' @keywords Internal
 #' @examples
-#' describe("/feedbacks")
-#' describe("/ideas")
-#' describe("/ideas/{id}")
+#' describe_api_path("/feedbacks")
+#' describe_api_path("/ideas")
+#' describe_api_path("/ideas/{id}")
 #'
 #' @importFrom tibble as_tibble
-describe_path <- function(path = "/feedbacks", verb = "get", element = "parameters") {
+describe_api_path <- function(path = "/feedbacks", verb = "get") {
   api <- prodpad_api_v1
   this <- api[["paths"]][[path]][[verb]]
   collapse <- function(..., collapse = "\n", sep = "") {
@@ -67,7 +75,7 @@ describe_path <- function(path = "/feedbacks", verb = "get", element = "paramete
 
   # @params
 
-  params <- this[[element]] %>% as_tibble() %>% select(name, description)
+  params <- this[["parameters"]] %>% as_tibble() %>% select(name, description)
   z3 <- paste0(
     glue("#' @param {params$name} {params$description}"),
     collapse = "\n#'\n",
