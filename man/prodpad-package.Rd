@@ -6,7 +6,16 @@
 \alias{prodpad-package}
 \title{prodpad: R Client for the ProdPad API}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Provide a low level wrapper `pp()` as well as higher level wrappers around the ProdPad API.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://andrie.github.io/prodpad/}
+}
+
 }
 \author{
 \strong{Maintainer}: Andrie de Vries \email{andrie@rstudio.com}
