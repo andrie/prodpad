@@ -32,4 +32,12 @@ test_that("get", {
     pp_get_idea_feedback("633051"), ncol = 23
   )
 
+  expect_tbl(
+    pp_get_companies(size = 11), nrow = 11, ncol = 11
+  )
+
+  expect_tbl(
+    pp_get_contacts(size = 3), nrow = 3, ncol = 14
+  )
+
 })
