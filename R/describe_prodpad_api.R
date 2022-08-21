@@ -15,7 +15,7 @@
 #'
 #' @param max.level passed to [str()]
 #'
-#' @keywords Internal
+#' @keywords internal
 #' @examples
 #' describe_api()
 describe_api <- function(max.level = 4) {
@@ -25,7 +25,7 @@ describe_api <- function(max.level = 4) {
 
 #' Describe prodpad API paths.
 #'
-#' @keywords Internal
+#' @keywords internal
 #' @examples
 #' describe_api_paths()
 describe_api_paths <- function() {
@@ -42,7 +42,7 @@ describe_api_paths <- function() {
 #'
 #' @param verb `get`, `post`, etc.
 #'
-#' @keywords Internal
+#' @keywords internal
 #' @examples
 #' describe_api_path("/feedbacks")
 #' describe_api_path("/ideas")

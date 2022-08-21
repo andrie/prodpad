@@ -9,7 +9,7 @@ pp_get_idea_feedback(id, ...)
 \arguments{
 \item{id}{Numeric ID of the idea.}
 
-\item{...}{Other arguments passed to [pp()]}
+\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
 }
 \description{
 Returns a tibble of all the feedback that is associated to the idea. This allows you to display the feedback in other apps for a particular idea or sync feedback between ProdPad and other applications.

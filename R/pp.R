@@ -20,14 +20,20 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 
 #' Query the Prodpad API
 #'
+#' @description
+#'
 #' This is an extremely minimal client. You need to know the API
 #' to be able to use this client. All this function does is:
+#'
 #' * Try to substitute each listed parameter into `endpoint`, using the
 #'   `{parameter}` notation.
+#'
 #' * If a GET request (the default), then add all other listed parameters
 #'   as query parameters.
+#'
 #' * If not a GET request, then send the other parameters in the request
 #'   body, as JSON.
+#'
 #' * Convert the response to an R list using [jsonlite::fromJSON()].
 #'
 #' @param endpoint Prodpad API endpoint. Must be one of the following forms:

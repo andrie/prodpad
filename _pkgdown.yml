@@ -1,0 +1,24 @@
+url: ~
+template:
+  bootstrap: 5
+
+reference:
+
+- title: "Get tibbles of prodpad data"
+  desc: >
+    Read information into tibbles
+  contents:
+  - starts_with("pp_get")
+
+- title: "Browse and describe the prodpad API"
+  desc: >
+    Useful to code directly against the API
+  contents:
+  - starts_with("browse")
+  - starts_with("describe")
+
+- title: Internals
+  desc: >
+    Low level API wrappers
+  contents:
+  - pp

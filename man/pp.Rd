@@ -24,66 +24,68 @@ pp(
 }
 \arguments{
 \item{endpoint}{Prodpad API endpoint. Must be one of the following forms:
-   * `METHOD path`, e.g. `GET /rate_limit`,
-   * `path`, e.g. `/rate_limit`,
-   * `METHOD url`, e.g. `GET https://api.github.com/rate_limit`,
-   * `url`, e.g. `https://api.github.com/rate_limit`.
+\itemize{
+\item \verb{METHOD path}, e.g. \code{GET /rate_limit},
+\item \code{path}, e.g. \verb{/rate_limit},
+\item \verb{METHOD url}, e.g. \verb{GET https://api.github.com/rate_limit},
+\item \code{url}, e.g. \verb{https://api.github.com/rate_limit}.
+}
 
-   If the method is not supplied, will use `.method`, which defaults
-   to `"GET"`.}
+If the method is not supplied, will use \code{.method}, which defaults
+to \code{"GET"}.}
 
 \item{...}{Name-value pairs giving API parameters. Will be matched into
-`endpoint` placeholders, sent as query parameters in GET requests, and as a
+\code{endpoint} placeholders, sent as query parameters in GET requests, and as a
 JSON body of POST requests. If there is only one unnamed parameter, and it
 is a raw vector, then it will not be JSON encoded, but sent as raw data, as
-is. This can be used for example to add assets to releases. Named `NULL`
-values are silently dropped. For GET requests, named `NA` values trigger an
-error. For other methods, named `NA` values are included in the body of the
-request, as JSON `null`.}
+is. This can be used for example to add assets to releases. Named \code{NULL}
+values are silently dropped. For GET requests, named \code{NA} values trigger an
+error. For other methods, named \code{NA} values are included in the body of the
+request, as JSON \code{null}.}
 
 \item{per_page}{Number of items to return per page. If omitted,
-will be substituted by `max(.limit, 100)` if `.limit` is set,
+will be substituted by \code{max(.limit, 100)} if \code{.limit} is set,
 otherwise determined by the API (never greater than 100).}
 
-\item{.destfile}{Path to write response to disk. If `NULL` (default),
+\item{.destfile}{Path to write response to disk. If \code{NULL} (default),
 response will be processed and returned as an object. If path is given,
 response will be written to disk in the form sent.}
 
-\item{.overwrite}{If `.destfile` is provided, whether to overwrite an
-existing file.  Defaults to `FALSE`.}
+\item{.overwrite}{If \code{.destfile} is provided, whether to overwrite an
+existing file.  Defaults to \code{FALSE}.}
 
-\item{.api_url}{Github API url (default: <https://api.github.com>). Used
-if `endpoint` just contains a path. Defaults to `GITHUB_API_URL`
+\item{.api_url}{Github API url (default: \url{https://api.github.com}). Used
+if \code{endpoint} just contains a path. Defaults to \code{GITHUB_API_URL}
 environment variable if set.}
 
 \item{.method}{HTTP method to use if not explicitly supplied in the
-`endpoint`.}
+\code{endpoint}.}
 
 \item{.limit}{Number of records to return. This can be used
-instead of manual pagination. By default it is `NULL`,
+instead of manual pagination. By default it is \code{NULL},
 which means that the defaults of the GitHub API are used.
 You can set it to a number to request more (or less)
-records, and also to `Inf` to request all records.
+records, and also to \code{Inf} to request all records.
 Note, that if you request many records, then multiple GitHub
 API calls are used to get them, and this can take a potentially
 long time.}
 
-\item{.accept}{The value of the `Accept` HTTP header. Defaults to
-`"application/vnd.github.v3+json"` . If `Accept` is given in
-`.send_headers`, then that will be used. This parameter can be used to
+\item{.accept}{The value of the \code{Accept} HTTP header. Defaults to
+\code{"application/vnd.github.v3+json"} . If \code{Accept} is given in
+\code{.send_headers}, then that will be used. This parameter can be used to
 provide a custom media type, in order to access a preview feature of
 the API.}
 
 \item{.send_headers}{Named character vector of header field values
-(except `Authorization`, which is handled via `.token`). This can be
-used to override or augment the default `User-Agent` header:
-`"https://github.com/r-lib/gh"`.}
+(except \code{Authorization}, which is handled via \code{.token}). This can be
+used to override or augment the default \code{User-Agent} header:
+\code{"https://github.com/r-lib/gh"}.}
 
 \item{.progress}{Whether to show a progress indicator for calls that
 need more than one HTTP request.}
 
-\item{.params}{Additional list of parameters to append to `...`.
-It is easier to use this than `...` if you have your parameters in
+\item{.params}{Additional list of parameters to append to \code{...}.
+It is easier to use this than \code{...} if you have your parameters in
 a list already.}
 
 \item{.unnest}{If TRUE, unnests the result object}
@@ -93,18 +95,20 @@ a list already.}
 \item{.unnest_dont_unlist}{Vector of columns name to ignore during the unnesting.}
 }
 \value{
-Answer from the API as a `pp_response` object, which is also a
-  `list`. Failed requests will generate an R error. Requests that
-  generate a raw response will return a raw vector.
+Answer from the API as a \code{pp_response} object, which is also a
+\code{list}. Failed requests will generate an R error. Requests that
+generate a raw response will return a raw vector.
 }
 \description{
 This is an extremely minimal client. You need to know the API
 to be able to use this client. All this function does is:
-* Try to substitute each listed parameter into `endpoint`, using the
-  `{parameter}` notation.
-* If a GET request (the default), then add all other listed parameters
-  as query parameters.
-* If not a GET request, then send the other parameters in the request
-  body, as JSON.
-* Convert the response to an R list using [jsonlite::fromJSON()].
+\itemize{
+\item Try to substitute each listed parameter into \code{endpoint}, using the
+\code{{parameter}} notation.
+\item If a GET request (the default), then add all other listed parameters
+as query parameters.
+\item If not a GET request, then send the other parameters in the request
+body, as JSON.
+\item Convert the response to an R list using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.
+}
 }

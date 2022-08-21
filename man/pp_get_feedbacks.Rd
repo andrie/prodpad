@@ -25,7 +25,7 @@ pp_get_feedbacks(
 )
 }
 \arguments{
-\item{state}{Set to value of `active` for active, `archived` for archived feedback, `unsorted` for unsorted feedback and `all` for all feedback. Default is `active`.}
+\item{state}{Set to value of \code{active} for active, \code{archived} for archived feedback, \code{unsorted} for unsorted feedback and \code{all} for all feedback. Default is \code{active}.}
 
 \item{company}{Set to filter the feedback results based on whether the feedback was entered for a contact linked to the company.}
 
@@ -57,7 +57,7 @@ pp_get_feedbacks(
 
 \item{size}{For setting the number of results per page. Default is 100.}
 
-\item{...}{Other arguments passed to [pp()]}
+\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
 }
 \value{
 tibble

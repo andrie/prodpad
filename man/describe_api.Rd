@@ -7,7 +7,7 @@
 describe_api(max.level = 4)
 }
 \arguments{
-\item{max.level}{passed to [str()]}
+\item{max.level}{passed to \code{\link[=str]{str()}}}
 }
 \description{
 Describe prodpad API.
@@ -15,4 +15,4 @@ Describe prodpad API.
 \examples{
 describe_api()
 }
-\keyword{Internal}
+\keyword{internal}

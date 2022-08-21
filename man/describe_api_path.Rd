@@ -7,9 +7,9 @@
 describe_api_path(path = "/feedbacks", verb = "get")
 }
 \arguments{
-\item{path}{Prodpad API path, e.g. `/feedbacks`}
+\item{path}{Prodpad API path, e.g. \verb{/feedbacks}}
 
-\item{verb}{`get`, `post`, etc.}
+\item{verb}{\code{get}, \code{post}, etc.}
 }
 \description{
 Prints result to the console, and copies to the clipboard.
@@ -20,4 +20,4 @@ describe_api_path("/ideas")
 describe_api_path("/ideas/{id}")
 
 }
-\keyword{Internal}
+\keyword{internal}

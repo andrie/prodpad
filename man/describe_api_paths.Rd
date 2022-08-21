@@ -12,4 +12,4 @@ Describe prodpad API paths.
 \examples{
 describe_api_paths()
 }
-\keyword{Internal}
+\keyword{internal}

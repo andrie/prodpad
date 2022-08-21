@@ -42,7 +42,7 @@ pp_get_companies(
 
 \item{page}{The page of results to return (size is always 100).}
 
-\item{...}{Other arguments passed to [pp()]}
+\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
 }
 \description{
 Return a list of companies. Companies are a collection of contacts that are providing feedback. Using companies allows you to group feedback from the same organisational source.

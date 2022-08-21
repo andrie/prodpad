@@ -57,7 +57,7 @@ pp_get_contacts(
 
 \item{size}{Number of results per page.}
 
-\item{...}{Other arguments passed to [pp()]}
+\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
 }
 \description{
 Get a tibble of all the contacts in the account. This can be used to sync contacts between ProdPad and CRMs.
