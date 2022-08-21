@@ -1,10 +1,18 @@
+utils::globalVariables(c(".", "name", "description"))
+
+
 #' @keywords internal
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom glue glue
-#' @importFrom rlang call_args current_call `!!!` `!!` inject
+#' @importFrom cli cli_abort
+#' @importFrom stats setNames
+#' @importFrom utils URLencode capture.output str writeClipboard
+#' @importFrom purrr map
+#' @importFrom dplyr mutate
 #'
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom magrittr %>%
 ## usethis namespace: end
 NULL

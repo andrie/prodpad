@@ -13,6 +13,8 @@ describe_api(max.level = 4)
 Describe prodpad API.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 describe_api()
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

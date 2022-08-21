@@ -16,7 +16,7 @@
 #' @param max.level passed to [str()]
 #'
 #' @keywords internal
-#' @examples
+#' @examplesIf FALSE
 #' describe_api()
 describe_api <- function(max.level = 4) {
   prodpad_api_v1 %>% str(max.level = max.level)
@@ -26,8 +26,8 @@ describe_api <- function(max.level = 4) {
 #' Describe prodpad API paths.
 #'
 #' @keywords internal
-#' @examples
-#' describe_api_paths()
+#' @examplesIf FALSE
+#' prodpad:::describe_api_paths()
 describe_api_paths <- function() {
   prodpad_api_v1$paths %>%
     purrr::map_dfr(~tibble(verb = names(.)), .id = "path")
@@ -43,7 +43,7 @@ describe_api_paths <- function() {
 #' @param verb `get`, `post`, etc.
 #'
 #' @keywords internal
-#' @examples
+#' @examplesIf FALSE
 #' describe_api_path("/feedbacks")
 #' describe_api_path("/ideas")
 #' describe_api_path("/ideas/{id}")

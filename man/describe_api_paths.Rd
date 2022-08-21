@@ -10,6 +10,8 @@ describe_api_paths()
 Describe prodpad API paths.
 }
 \examples{
-describe_api_paths()
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+prodpad:::describe_api_paths()
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

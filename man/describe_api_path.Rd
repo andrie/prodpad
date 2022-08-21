@@ -15,9 +15,10 @@ describe_api_path(path = "/feedbacks", verb = "get")
 Prints result to the console, and copies to the clipboard.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 describe_api_path("/feedbacks")
 describe_api_path("/ideas")
 describe_api_path("/ideas/{id}")
-
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

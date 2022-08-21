@@ -7,7 +7,6 @@ Authors@R:
 Description: Provide a low level wrapper `pp()` as well as higher level wrappers around the ProdPad API.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.2.1
 Imports: 
     httr,
@@ -15,13 +14,18 @@ Imports:
     tidyr,
     rlang,
     dplyr,
-    tidyselect
+    tidyselect,
+    jsonlite,
+    tibble,
+    purrr,
+    magrittr,
+    cli
 Suggests: 
     shinycssloaders,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/Needs/website: tidyverse/tidytemplate
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
 Roxygen: list(markdown = TRUE)
 URL: https://andrie.github.io/prodpad/
