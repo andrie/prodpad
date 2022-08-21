@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# prodpad
+# prodpad <img src="man/figures/logo.png" align="right" height="138" />
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -46,10 +46,13 @@ pp_get_products()
 
 Cole Arendt also wrote a `prodpad`
 [package](https://github.com/colearendt/prodpad), using R6 classes to
-represent the connection to Prodpad.
-
+represent the connection to Prodpad.  
 But my implementation was inspired by the `gh`
-[package](https://github.com/r-lib/gh) by Gábor Csárdi.
-
+[package](https://github.com/r-lib/gh) by Gábor Csárdi.  
 I found the ideas of `gh` to be more flexible and ported `gh` in its
 entirety to the `pp()` function in `prodpad`.
+
+## Trademarks
+
+The ProdPad name and logo are trademarks of ProdPad (CreateSHIFT Ltd.).
+The author of this package has no affiliation with ProdPad.
