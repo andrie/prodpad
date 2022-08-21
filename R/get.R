@@ -83,6 +83,44 @@ pp_get_ideas <- function(
 }
 
 
+#' Get an idea.
+#'
+#' Use the numeric ID to return an idea. You can get a simple version of the idea or an expanded one using the expanded parameter which returns the business case, functional specs, notes, user stories, comments and other linked data.
+#'
+#' If you have the project_id (the numerical number from the ProdPad UI in the idea canvas url) you can use that to fetch the idea by using the query parameter by_project_id, otherwise you need to use the global numerical ID.
+#'
+#'
+#' @param id Numeric ID of the idea unless using the by_project_id then it is the numeric project ID (the Idea number seen in the UI).
+#'
+#' @param expand Whether to return the expanded version of the idea object. This adds in business case, user stories, comments, etc.
+#'
+#' @param by_project_id Whether the ID represents the project_id instead of the numeric ID.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note GET /ideas/{id}
+#'
+#' @export
+pp_get_idea <- function(
+    id = NULL,
+    expand = NULL,
+    by_project_id = NULL,
+    ...
+) {
+  pp("/ideas/{id}",
+     id = id,
+     expand = expand,
+     by_project_id = by_project_id,
+     ... = ...,
+     .unnest = FALSE
+  ) %>%
+    c() # drops attributes
+}
+
+
+
+
+
 #' Get feedback associated to an idea.
 #'
 #' Returns a tibble of all the feedback that is associated to the idea. This allows you to display the feedback in other apps for a particular idea or sync feedback between ProdPad and other applications.
