@@ -26,7 +26,7 @@ describe_api <- function(max.level = 4) {
 #' @keywords Internal
 #' @examples
 #' describe_api_paths()
-describe_api_paths <- function() {
+describe_api_path <- function() {
   prodpad_api_v1$paths %>%
     purrr::map_dfr(~tibble(verb = names(.)), .id = "path")
 }
@@ -39,17 +39,22 @@ describe_api_paths <- function() {
 #' describe("/feedbacks")
 #' describe("/ideas")
 #' describe("/ideas/{id}")
-describe <- function(path = "/feedbacks", verb = "get", element = "parameters") {
+#'
+#' @importFrom tibble as_tibble
+describe_path <- function(path = "/feedbacks", verb = "get", element = "parameters") {
   api <- prodpad_api_v1
   this <- api[["paths"]][[path]][[verb]]
   collapse <- function(..., collapse = "\n", sep = "") {
     paste0(..., collapse = collapse, sep = sep)
   }
 
+  # title
+
   title <- this$summary %>% gsub("\\.*\n*$", "", .)
   z1 <- collapse(glue::glue("#' {title}.\n#'\n"), sep = "\n")
 
-  # browser()
+  # description
+
   desc <- this$description %>%
     strsplit("\n") %>%
     .[[1]] %>%
@@ -60,6 +65,7 @@ describe <- function(path = "/feedbacks", verb = "get", element = "parameters") 
   ))
   z2
 
+  # @params
 
   params <- this[[element]] %>% as_tibble() %>% select(name, description)
   z3 <- paste0(
@@ -68,33 +74,43 @@ describe <- function(path = "/feedbacks", verb = "get", element = "parameters") 
     sep = ""
   )
 
+  dots <- collapse(c(
+    "#'",
+    "#' @param ... Other arguments passed to [pp()]"
+  ))
+
+  # @note
+
   z4 <- collapse(c(
       "#'",
-      glue("\n#'\n#' @note {toupper(verb)} {path}")
+      glue("#' @note {toupper(verb)} {path}")
     ))
+
+  # @export
 
   z5 <- collapse(c(
     "#'",
     "#' @export"
   ))
 
+  # function definition
 
   fn_name <- glue::glue("pp_{verb}_{gsub('^//*', '', path)}")
   func <- collapse(
     c(
       glue("{{fn_name}} <- function(", .open = "{{", .close = "}}"),
-      glue("  {params$name}, "),
+      glue("  {params$name} = NULL, "),
       "  ...",
       ") {",
-      glue("  pp(\"{verb} {path}\""),
+      glue("  pp(\"{verb} {path}\","),
       glue("    {params$name} = {params$name},"),
-      "    ...,",
+      "    ... = ...,",
       "    .unnest_element = NULL",
       "  )",
       "}"
     )
   )
-  z <- collapse(z1, z2, z3, z4, "\n", z5, "\n", func, sep = "\n")
+  z <- collapse(z1, z2, z3, "\n", dots, "\n", z4, "\n", z5, "\n", func, sep = "\n")
   writeClipboard(z)
   cat(z)
   message("Copied to clipboard")
