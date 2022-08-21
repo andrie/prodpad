@@ -6,7 +6,7 @@
 #'
 #' @param group_by Setting to customer will group the feedback by customer
 #'
-#' @param state Set to value of active for active, archived for archived feedback, unsorted for unsorted feedback and all for all feedback. Default is active.
+#' @param state Set to value of `active` for active, `archived` for archived feedback, `unsorted` for unsorted feedback and `all` for all feedback. Default is `active`.
 #'
 #' @param page Set to page through the results. Default is 1.
 #'
@@ -39,6 +39,8 @@
 #' @param ... Other arguments passed to [pp()]
 #'
 #' @note GET /feedbacks
+#'
+#' @return tibble
 #'
 #' @export
 pp_get_feedbacks <- function(

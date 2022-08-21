@@ -70,17 +70,6 @@ pp_get_ideas <- function(
 }
 
 
-# in progress -------------------------------------------------------------
-
-
-#' #' @export
-#' get_idea_feedback <- function(client, id) {
-#'   url <- glue::glue("/ideas/", as.character(id), "/feedback")
-#'   rawdat <- client$GET(url)
-#'
-#'   return(rawdat)
-# }
-
 #' Get feedback associated to an idea.
 #'
 #' Returns a tibble of all the feedback that is associated to the idea. This allows you to display the feedback in other apps for a particular idea or sync feedback between ProdPad and other applications.
@@ -105,6 +94,7 @@ pp_get_idea_feedback <- function(
   )
 }
 
+# in progress -------------------------------------------------------------
 
 
 

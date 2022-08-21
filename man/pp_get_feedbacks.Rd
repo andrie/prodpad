@@ -2,7 +2,7 @@
 % Please edit documentation in R/feedback.R
 \name{pp_get_feedbacks}
 \alias{pp_get_feedbacks}
-\title{Get tibble of feedback.}
+\title{Get tibble of feedbacks.}
 \usage{
 pp_get_feedbacks(
   state = c("active", "archived", "unsorted", "all"),
@@ -25,7 +25,7 @@ pp_get_feedbacks(
 )
 }
 \arguments{
-\item{state}{Set to value of active for active, archived for archived feedback, unsorted for unsorted feedback and all for all feedback. Default is active.}
+\item{state}{Set to value of `active` for active, `archived` for archived feedback, `unsorted` for unsorted feedback and `all` for all feedback. Default is `active`.}
 
 \item{company}{Set to filter the feedback results based on whether the feedback was entered for a contact linked to the company.}
 
@@ -59,8 +59,11 @@ pp_get_feedbacks(
 
 \item{...}{Other arguments passed to [pp()]}
 }
+\value{
+tibble
+}
 \description{
-Get tibble of feedback.
+Returns a tibble of feedback which can be a straight list or grouped by contact using the group_by parameter.  The list can also be filtered by state query parameter for active, archived, unsorted or all.Note that by default only active feedback is returned.
 }
 \note{
 GET /feedbacks

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.R
 \name{pp_get_idea_feedback}
 \alias{pp_get_idea_feedback}
-\title{}
+\title{Get feedback associated to an idea.}
 \usage{
 pp_get_idea_feedback(id, ...)
 }
@@ -12,10 +12,6 @@ pp_get_idea_feedback(id, ...)
 \item{...}{Other arguments passed to [pp()]}
 }
 \description{
-return(rawdat)
-Get feedback associated to an idea.
-}
-\details{
 Returns a tibble of all the feedback that is associated to the idea. This allows you to display the feedback in other apps for a particular idea or sync feedback between ProdPad and other applications.
 }
 \note{
