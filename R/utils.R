@@ -71,3 +71,13 @@ drop_named_nulls <- function(x) {
   null <- vapply(x, is.null, logical(1))
   cleanse_names(x[!named | !null])
 }
+
+#' Parse prodpad dates using lubridate.
+#'
+#' This is useful for columns such as `created_at` and `updated_at`.
+#'
+#' @param x Character vector to parse.  Assumes `datetimes` are written as `2022-01-01T20-00-00Z`
+parse_prodpad_date <- function(x) {
+  lubridate::parse_date_time(x, orders="%Y-%m-%d %H%:M%:%S")
+}
+
