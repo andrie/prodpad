@@ -10,11 +10,12 @@ reference:
   contents:
   - starts_with("pp_get")
 
-- title: "Manipulated columns in result tibbles"
+- title: "Manipulate columns in result tibbles"
   desc: >
     Helper functions to extract vectors, hoist list columns, etc.
   contents:
   - unnest_tibble
+  - parse_prodpad_date
 
 - title: "Browse and describe the prodpad API"
   desc: >
