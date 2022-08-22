@@ -6,7 +6,7 @@ utils::globalVariables(c(".", "name", "description"))
 #' @importFrom glue glue
 #' @importFrom cli cli_abort
 #' @importFrom stats setNames
-#' @importFrom utils URLencode capture.output str writeClipboard
+#' @importFrom utils URLencode capture.output str
 #' @importFrom purrr map
 #' @importFrom dplyr mutate
 #'

@@ -19,7 +19,9 @@ Imports:
     tibble,
     purrr,
     magrittr,
-    cli
+    cli,
+    clipr,
+    lubridate
 Suggests: 
     shinycssloaders,
     testthat (>= 3.0.0)
@@ -28,4 +30,4 @@ Config/Needs/website: tidyverse/tidytemplate
 Depends: 
     R (>= 3.5.0)
 Roxygen: list(markdown = TRUE)
-URL: https://andrie.github.io/prodpad/
+URL: https://andrie.github.io/prodpad/, https://github.com/andrie/prodpad

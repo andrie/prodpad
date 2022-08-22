@@ -129,7 +129,7 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
     )
   )
   z <- collapse(z1, z2, z3, "\n", dots, "\n", z4, "\n", z5, "\n", func, sep = "\n")
-  writeClipboard(z)
+  clipr::write_clip(z)
   cat(z)
   message("Copied to clipboard")
   invisible(z)
