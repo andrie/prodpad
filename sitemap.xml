@@ -37,6 +37,9 @@
     <loc>https://andrie.github.io/prodpad/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://andrie.github.io/prodpad/reference/parse_prodpad_date.html</loc>
+  </url>
+  <url>
     <loc>https://andrie.github.io/prodpad/reference/pp.html</loc>
   </url>
   <url>
@@ -53,6 +56,9 @@
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/pp_get_feedbacks.html</loc>
+  </url>
+  <url>
+    <loc>https://andrie.github.io/prodpad/reference/pp_get_idea.html</loc>
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/pp_get_idea_feedback.html</loc>
@@ -80,5 +86,8 @@
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/prodpad-package.html</loc>
+  </url>
+  <url>
+    <loc>https://andrie.github.io/prodpad/reference/unnest_tibble.html</loc>
   </url>
 </urlset>
