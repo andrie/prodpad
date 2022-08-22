@@ -9,11 +9,12 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of `prodpad` is to provide a low level wrapper around the
-ProdPad API, using the `pp()` function.
+The `prodpad` packages exposes higher level APIs to extract tibbles with
+ProdPad information (for example, products, feedback, ideas, etc.) from
+the ProdPad API.
 
-In addition, exposes higher level APIs to extract tibbles with products,
-feedback, ideas, etc.
+In addition, `prodpad` provides a low level wrapper around the ProdPad
+API - the `pp()` function.
 
 ## Installation
 
@@ -31,10 +32,12 @@ To get started, you need a ProdPad API key. This can be found by going
 to: [Profile =\> API Keys](https://app.prodpad.com/me/apikeys). (Or use
 `prodpad::browse_api_key()` to navigate there interactively)
 
-Then export that API key as an environment variable (i.e. in
-`.Renviron`):
+Then export that API key as an environment variable, e.g. in
+`.Renviron`:
 
-    PRODPAD_API_KEY=my-api-key
+``` bash
+PRODPAD_API_KEY=my-api-key
+```
 
 ## Example
 
@@ -49,11 +52,10 @@ pp_get_products()
 
 Cole Arendt also wrote a `prodpad`
 [package](https://github.com/colearendt/prodpad), using R6 classes to
-represent the connection to Prodpad.  
-But my implementation was inspired by the `gh`
-[package](https://github.com/r-lib/gh) by Gábor Csárdi.  
-I found the ideas of `gh` to be more flexible and ported `gh` in its
-entirety to the `pp()` function in `prodpad`.
+represent the connection to Prodpad. However, this implementation was
+inspired by the `gh` [package](https://github.com/r-lib/gh) by Gábor
+Csárdi. I found the ideas of `gh` to be more flexible and ported `gh` in
+its entirety to the `pp()` function in `prodpad`.
 
 ## Trademarks
 

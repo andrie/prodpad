@@ -14,6 +14,8 @@ Provide a low level wrapper `pp()` as well as higher level wrappers around the P
 Useful links:
 \itemize{
   \item \url{https://andrie.github.io/prodpad/}
+  \item \url{https://github.com/andrie/prodpad}
+  \item Report bugs at \url{https://github.com/andrie/prodpad/issues}
 }
 
 }

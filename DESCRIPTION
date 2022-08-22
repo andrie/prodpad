@@ -31,3 +31,4 @@ Depends:
     R (>= 3.5.0)
 Roxygen: list(markdown = TRUE)
 URL: https://andrie.github.io/prodpad/, https://github.com/andrie/prodpad
+BugReports: https://github.com/andrie/prodpad/issues
