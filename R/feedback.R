@@ -86,3 +86,122 @@ pp_get_feedbacks <- function(
   )
 }
 
+
+#' Get a piece of feedback.
+#'
+#' Return an individual piece of feedback. The feedback is returned with the details of the contact that provided the piece of feedback.
+#'
+#'
+#' @param id Feedback ID.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note GET /feedbacks/{id}
+#'
+#' @export
+pp_get_feedback <- function(
+    id = NULL,
+    ...
+) {
+  pp("get /feedbacks/{id}",
+     id = id,
+     ... = ...,
+     .unnest_element = NULL
+  ) %>%
+    c()
+}
+
+
+
+
+# post --------------------------------------------------------------------
+
+
+
+#' Create a new feedback.
+#'
+#' Create a new feedback in the account. The feedback has to have either a name
+#' or an email and the actual feedback. The email is used to add the feedback to
+#' an existing contact.
+#'
+#' Fields to create a feedback. Note either the contact ID or contact name is
+#' required. Otherwise a 400 error will be returned. If a name and email field
+#' are used, the value in the email field will be used to see if the contact
+#' already exists and if it does the feedback will be automatically added to the
+#' existing contact.
+#'
+#'
+#' @param contact_id	`string($uuid)` ID of the contact providing the feedback.
+#'   Either Contact ID or Contact name is required.
+#'
+#' @param name	`string` Name of the contact providing the feedback. Either
+#'   Contact ID or Contact name is required.
+#'
+#' @param company_id	`string($uuid)` UUID of the company to link the contact to.
+#'   The UUID can be determined using /GET companies endpoint.
+#'
+#' @param feedback	`string` (Required) The feedback. This field accepts HTML and
+#'   is stored as UTF-8.
+#'
+#' @param email	`string` The email of the contact. This is used to avoid
+#'   duplication of contacts. This can be any unique ID for each contact.
+#'
+#' @param about	`string` Text field about the contact. This will overright the
+#'   existing about if the contact already exists. This field accepts HTML and
+#'   is stored as UTF-8.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note POST /feedbacks
+#'
+#' @export
+pp_post_feedback <- function(
+    contact_id,
+    contact_name = NULL,
+    product_id,
+    product_name = NA,
+    feedback,
+    company_id = NULL,
+    ...
+) {
+  feedback <- as.character(feedback)
+  products = data.frame(id = product_id, name = product_name)
+
+  pp("POST /feedbacks",
+    contact_id = contact_id,
+    name = contact_name,
+    # company_id = company_id,
+    feedback = feedback,
+    # email = email,
+    # about = about,
+    products = products,
+     ... = ...,
+    .send_headers = c(`Content-Type` = "application/json")
+  ) %>%
+    c()
+}
+
+#' Archive an existing piece of feedback.
+#'
+#' Use this endpoint to edit the details of an existing piece of feedback including the feedback, the status and external links to add (for example link to a record in the CRM, other 3rd party application or video of the customer interview).
+#'
+#'
+#' @param id Feedback ID
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note PUT /feedbacks/{id}
+#'
+#' @export
+pp_archive_feedback <- function(
+    id = NULL,
+    ...
+) {
+  pp("PUT /feedbacks/{id}",
+     id = id,
+     state = "archived",
+     ... = ...,
+     .send_headers = c(`Content-Type` = "application/json")
+  )
+}
+

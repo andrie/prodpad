@@ -1,8 +1,4 @@
 
-# @export
-# pp_contact_create <- function(client, name) {
-#   client$POST("/contacts", body = list(name = name))
-# }
 
 # @export
 pp_contact_url <- function(id) {

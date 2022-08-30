@@ -21,7 +21,8 @@ Imports:
     magrittr,
     cli,
     clipr,
-    lubridate
+    lubridate,
+    stringr
 Suggests: 
     shinycssloaders,
     testthat (>= 3.0.0)

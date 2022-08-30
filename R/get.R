@@ -1,16 +1,27 @@
+
+# products ----------------------------------------------------------------
+
+
+
 #' Get tibble of products.
 #'
 #' @family Products
 #' @export
 #' @importFrom dplyr bind_cols select rename select_if
 #' @importFrom purrr map_dfr
+#' @importFrom magrittr set_attr
 pp_get_products <- function() {
   res <- pp("/products", group = FALSE)
-  p <- res$productlines
-
-  p %>%
-    map_dfr(~.$products %>% pp_unnest())
+  count <- attr(res, "count")
+  res$productlines %>%
+    map_dfr(~.$products %>% pp_unnest()) %>%
+    set_attr("count", count)
 }
+
+
+# tags --------------------------------------------------------------------
+
+
 
 #' Get tibble of products.
 #'
@@ -37,6 +48,9 @@ pp_get_tags_vector <- function() {
   all_tags <- pp_get_tags()
   as.list(rlang::set_names(all_tags[["tag_id"]], all_tags[["tag"]]))
 }
+
+
+# ideas -------------------------------------------------------------------
 
 
 #' Get list of ideas.
@@ -103,14 +117,14 @@ pp_get_ideas <- function(
 #' @export
 pp_get_idea <- function(
     id = NULL,
-    expand = NULL,
-    by_project_id = NULL,
+    expand = FALSE,
+    by_project_id = FALSE,
     ...
 ) {
   pp("/ideas/{id}",
      id = id,
-     expand = expand,
-     by_project_id = by_project_id,
+     expand = isTRUE(expand),
+     by_project_id = isTRUE(by_project_id),
      ... = ...,
      .unnest = FALSE
   ) %>%
@@ -145,6 +159,9 @@ pp_get_idea_feedback <- function(
      .unnest_dont_unlist = c("tags", "products", "personas")
   )
 }
+
+
+# companies ---------------------------------------------------------------
 
 
 #' Get a tibble of companies.
@@ -214,13 +231,9 @@ pp_get_companies <- function(
      ... = ...,
      .unnest_element = "companies"
   )}
-  get_page()
+  get_page() # todo: implement paging
 }
 
-
-get_id_vector <- function(x, id = "id", name = "name") {
-  setNames(x[[id]], x[[name]])
-}
 
 #' Get named vector of companies.
 #'
@@ -232,6 +245,8 @@ pp_get_companies_vector <- function() {
   pp_get_companies() %>%
     get_id_vector()
 }
+
+# contacts ----------------------------------------------------------------
 
 
 #' Get a tibble of contacts.
@@ -281,7 +296,7 @@ pp_get_contacts <- function(
     size = NULL,
     ...
 ) {
-  pp("get /contacts",
+  pp("/contacts",
      company = company,
      persona = persona,
      job_role = job_role,
@@ -300,6 +315,7 @@ pp_get_contacts <- function(
 
 
 
+
 #' Get named vector of contacts
 #'
 #' @export
@@ -312,7 +328,39 @@ pp_get_contacts_vector <- function() {
 }
 
 
-# in progress -------------------------------------------------------------
+#' Get a contact.
+#'
+#' Returns the details of a contact. This will include a contacts PII (such as name and email) so be aware of the privacy of the individual when using this endpoint.
+#'
+#' You can choose to include the feedback provided by the contact or not.
+#'
+#'
+#' @param id Contact ID to fetch.
+#'
+#' @param feedbacks Whether to include the feedback provided by the contact in the response or not.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note GET /contacts/{id}
+#'
+#' @export
+pp_get_contact <- function(
+    id = NULL,
+    feedbacks = NULL,
+    ...
+) {
+  pp("get /contacts/{id}",
+     id = id,
+     feedbacks = feedbacks,
+     ... = ...,
+     .unnest_element = NULL
+  ) %>%
+    c()
+}
+
+
+# personas ----------------------------------------------------------------
+
 
 #' Get tibble of personas.
 #'
@@ -341,3 +389,54 @@ pp_get_personas_vector <- function() {
   pp_get_personas() %>%
     get_id_vector()
 }
+
+# users -------------------------------------------------------------------
+
+#' Get a list of users.
+#'
+#' This endpoint returns a list of users with roles in the account.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note GET /users
+#'
+#' @family User
+#' @export
+#' @return Tibble with user information
+pp_get_users <- function(
+    ...
+) {
+  pp("get /users",
+     ... = ...,
+     .unnest = TRUE
+  )
+}
+
+
+#' Get a user.
+#'
+#' Return the details on the user and their role.
+#'
+#'
+#' @param id Numeric ID of the user.
+#'
+#' @param ... Other arguments passed to [pp()]
+#'
+#' @note GET /user/{id}
+#'
+#' @family User
+#' @export
+pp_get_user <- function(
+    id = NULL,
+    ...
+) {
+  pp("/users/{id}",
+     id = id,
+     ... = ...
+     # .unnest_element = NULL
+  ) %>%
+    c()
+}
+
+
+

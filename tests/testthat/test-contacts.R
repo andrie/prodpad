@@ -24,6 +24,10 @@ test_that("get", {
     pp_get_products(), ncol = 13
   )
 
+  expect_true(
+    pp_get_products() %>% attr("count") > 0
+  )
+
   expect_tbl(
     pp_get_ideas(size = 6), nrow = 6, ncol = 20
   )
@@ -43,5 +47,14 @@ test_that("get", {
   expect_tbl(
     pp_get_personas(), ncol = 7
   )
+
+  expect_tbl(
+    pp_get_users(), ncol = 8
+  )
+
+  expect_type(
+    pp_get_user(90438), "list"
+  )
+
 
 })

@@ -4,7 +4,7 @@
 \alias{pp_get_idea}
 \title{Get an idea.}
 \usage{
-pp_get_idea(id = NULL, expand = NULL, by_project_id = NULL, ...)
+pp_get_idea(id = NULL, expand = FALSE, by_project_id = FALSE, ...)
 }
 \arguments{
 \item{id}{Numeric ID of the idea unless using the by_project_id then it is the numeric project ID (the Idea number seen in the UI).}

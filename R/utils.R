@@ -81,3 +81,7 @@ parse_prodpad_date <- function(x) {
   lubridate::parse_date_time(x, orders="%Y-%m-%d %H%:M%:%S")
 }
 
+get_id_vector <- function(x, id = "id", name = "name") {
+  setNames(x[[id]], x[[name]])
+}
+
