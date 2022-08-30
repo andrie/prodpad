@@ -5,3 +5,5 @@
 .Renviron*
 *.html
 docs
+
+cookies.rds
