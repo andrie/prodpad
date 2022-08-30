@@ -94,7 +94,7 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
 
   dots <- collapse(c(
     "#'",
-    "#' @param ... Other arguments passed to [pp()]"
+    "#' @param ... Other arguments passed to [.pp()]()]"
   ))
 
   # @note
@@ -120,7 +120,7 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
       glue("  {params$name} = NULL, "),
       "  ...",
       ") {",
-      glue("  pp(\"{verb} {path}\","),
+      glue(" .pp(\"{verb} {path}\","),
       glue("    {params$name} = {params$name},"),
       "    ... = ...,",
       "    .unnest_element = NULL",

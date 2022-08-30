@@ -9,7 +9,7 @@ pp_get_user(id = NULL, ...)
 \arguments{
 \item{id}{Numeric ID of the user.}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
 Return the details on the user and their role.

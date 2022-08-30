@@ -9,7 +9,7 @@ pp_archive_feedback(id = NULL, ...)
 \arguments{
 \item{id}{Feedback ID}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
 Use this endpoint to edit the details of an existing piece of feedback including the feedback, the status and external links to add (for example link to a record in the CRM, other 3rd party application or video of the customer interview).

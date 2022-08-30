@@ -24,7 +24,7 @@ is stored as UTF-8.}
 \item{company_id}{\verb{string($uuid)} UUID of the company to link the contact to.
 The UUID can be determined using /GET companies endpoint.}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 
 \item{name}{\code{string} Name of the contact providing the feedback. Either
 Contact ID or Contact name is required.}

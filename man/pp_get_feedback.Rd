@@ -9,7 +9,7 @@ pp_get_feedback(id = NULL, ...)
 \arguments{
 \item{id}{Feedback ID.}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
 Return an individual piece of feedback. The feedback is returned with the details of the contact that provided the piece of feedback.

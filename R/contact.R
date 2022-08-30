@@ -19,7 +19,7 @@ pp_contact_url <- function(id) {
 #'
 #' @param email Filter the contacts by an email
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @export
 pp_get_contacts <- function(
@@ -32,7 +32,7 @@ pp_get_contacts <- function(
 ) {
   arguments <- call_args(current_call())
 
-    pp(
+   .pp(
       "/contacts",
       company = company,
       persona = persona,

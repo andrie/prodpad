@@ -36,7 +36,7 @@
 #'
 #' @param external_url Filter feedback to return the feedback associated with a specific external url. An example of an external url is that of a record in a CRM or a ticket in a customer support application
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /feedbacks
 #'
@@ -63,7 +63,7 @@ pp_get_feedbacks <- function(
     ...
 ) {
   "state" <- match.arg(state)
-  pp("get /feedbacks",
+ .pp("get /feedbacks",
      group_by = group_by,
      state = state,
      page = page,
@@ -94,7 +94,7 @@ pp_get_feedbacks <- function(
 #'
 #' @param id Feedback ID.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /feedbacks/{id}
 #'
@@ -103,7 +103,7 @@ pp_get_feedback <- function(
     id = NULL,
     ...
 ) {
-  pp("get /feedbacks/{id}",
+ .pp("get /feedbacks/{id}",
      id = id,
      ... = ...,
      .unnest_element = NULL
@@ -150,7 +150,7 @@ pp_get_feedback <- function(
 #'   existing about if the contact already exists. This field accepts HTML and
 #'   is stored as UTF-8.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note POST /feedbacks
 #'
@@ -167,7 +167,7 @@ pp_post_feedback <- function(
   feedback <- as.character(feedback)
   products = data.frame(id = product_id, name = product_name)
 
-  pp("POST /feedbacks",
+ .pp("POST /feedbacks",
     contact_id = contact_id,
     name = contact_name,
     # company_id = company_id,
@@ -188,7 +188,7 @@ pp_post_feedback <- function(
 #'
 #' @param id Feedback ID
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note PUT /feedbacks/{id}
 #'
@@ -197,7 +197,7 @@ pp_archive_feedback <- function(
     id = NULL,
     ...
 ) {
-  pp("PUT /feedbacks/{id}",
+ .pp("PUT /feedbacks/{id}",
      id = id,
      state = "archived",
      ... = ...,

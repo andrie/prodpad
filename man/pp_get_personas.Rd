@@ -7,7 +7,7 @@
 pp_get_personas(...)
 }
 \arguments{
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
 Get tibble of personas.

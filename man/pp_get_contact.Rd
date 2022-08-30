@@ -11,7 +11,7 @@ pp_get_contact(id = NULL, feedbacks = NULL, ...)
 
 \item{feedbacks}{Whether to include the feedback provided by the contact in the response or not.}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
 Returns the details of a contact. This will include a contacts PII (such as name and email) so be aware of the privacy of the individual when using this endpoint.

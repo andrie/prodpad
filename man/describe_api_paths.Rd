@@ -4,10 +4,7 @@
 \alias{describe_api_paths}
 \title{Describe prodpad API paths.}
 \usage{
-describe_api_paths(search = "")
-}
-\arguments{
-\item{search}{Filter path for rows containing the filter tearm}
+describe_api_paths()
 }
 \description{
 Describe prodpad API paths.

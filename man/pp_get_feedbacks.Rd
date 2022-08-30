@@ -57,7 +57,7 @@ pp_get_feedbacks(
 
 \item{size}{For setting the number of results per page. Default is 100.}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \value{
 tibble

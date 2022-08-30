@@ -27,7 +27,7 @@ pp_get_ideas(
 
 \item{size}{The number of results per page}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
 Get list of ideas.

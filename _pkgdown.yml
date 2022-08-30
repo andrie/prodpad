@@ -9,6 +9,9 @@ reference:
     Read information into tibbles
   contents:
   - starts_with("pp_get")
+  - starts_with("pp_post")
+  - starts_with("pp_archive")
+
 
 - title: "Manipulate columns in result tibbles"
   desc: >
@@ -28,4 +31,4 @@ reference:
   desc: >
     Low level API wrappers
   contents:
-  - pp
+  - .pp

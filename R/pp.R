@@ -112,7 +112,7 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 #'
 #'
 #' @export
-pp <- function(endpoint, ..., per_page = NULL, .destfile = NULL,
+.pp <- function(endpoint, ..., per_page = NULL, .destfile = NULL,
                .overwrite = FALSE, .api_url = NULL, .method = "GET",
                .limit = NULL, .accept = "application/json",
                .send_headers = NULL, .progress = TRUE, .params = list(),

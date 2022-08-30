@@ -11,8 +11,8 @@
 #' @importFrom purrr map_dfr
 #' @importFrom magrittr set_attr
 pp_get_products <- function() {
-  res <- pp("/products", group = FALSE)
-  count <- attr(res, "count")
+  res <- .pp("/products", group = FALSE)
+  count <- res[["product_count"]]
   res$productlines %>%
     map_dfr(~.$products %>% pp_unnest()) %>%
     set_attr("count", count)
@@ -37,7 +37,7 @@ pp_get_products_vector <- function() {
 #' @family Tags
 #' @export
 pp_get_tags <- function() {
-  pp("/tags", .unnest = TRUE)
+ .pp("/tags", .unnest = TRUE)
 }
 
 #' Get vector of tags
@@ -67,7 +67,7 @@ pp_get_tags_vector <- function() {
 #'
 #' @param size The number of results per page
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @export
 #' @family Ideas
@@ -84,7 +84,7 @@ pp_get_ideas <- function(
 ) {
   state <- match.arg(state)
 
-  pp("/ideas",
+ .pp("/ideas",
      tags = tags,
      product = product,
      persona = persona,
@@ -110,7 +110,7 @@ pp_get_ideas <- function(
 #'
 #' @param by_project_id Whether the ID represents the project_id instead of the numeric ID.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /ideas/{id}
 #'
@@ -121,7 +121,7 @@ pp_get_idea <- function(
     by_project_id = FALSE,
     ...
 ) {
-  pp("/ideas/{id}",
+ .pp("/ideas/{id}",
      id = id,
      expand = isTRUE(expand),
      by_project_id = isTRUE(by_project_id),
@@ -142,7 +142,7 @@ pp_get_idea <- function(
 #'
 #' @param id Numeric ID of the idea.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /ideas/{id}/feedback
 #' @family Ideas
@@ -152,7 +152,7 @@ pp_get_idea_feedback <- function(
     id,
     ...
 ) {
-  pp("/ideas/{id}/feedback",
+ .pp("/ideas/{id}/feedback",
      id = id,
      ... = ...,
      .unnest = TRUE,
@@ -195,7 +195,7 @@ pp_get_idea_feedback <- function(
 #'
 #' @param page The page of results to return (size is always 100).
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /companies
 #' @family Companies
@@ -216,7 +216,7 @@ pp_get_companies <- function(
     ...
 ) {
   get_page <- function() {
-  pp("/companies",
+ .pp("/companies",
      country = country,
      company_size = company_size,
      value = value,
@@ -276,7 +276,7 @@ pp_get_companies_vector <- function() {
 #'
 #' @param size Number of results per page.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @family Contacts
 #' @note GET /contacts
@@ -296,7 +296,7 @@ pp_get_contacts <- function(
     size = NULL,
     ...
 ) {
-  pp("/contacts",
+ .pp("/contacts",
      company = company,
      persona = persona,
      job_role = job_role,
@@ -339,7 +339,7 @@ pp_get_contacts_vector <- function() {
 #'
 #' @param feedbacks Whether to include the feedback provided by the contact in the response or not.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /contacts/{id}
 #'
@@ -349,7 +349,7 @@ pp_get_contact <- function(
     feedbacks = NULL,
     ...
 ) {
-  pp("get /contacts/{id}",
+ .pp("get /contacts/{id}",
      id = id,
      feedbacks = feedbacks,
      ... = ...,
@@ -364,7 +364,7 @@ pp_get_contact <- function(
 
 #' Get tibble of personas.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /personas
 #'
@@ -373,7 +373,7 @@ pp_get_contact <- function(
 pp_get_personas <- function(
     ...
 ) {
-  pp("get /personas",
+ .pp("get /personas",
      ... = ...,
      .unnest = TRUE
   )
@@ -396,7 +396,7 @@ pp_get_personas_vector <- function() {
 #'
 #' This endpoint returns a list of users with roles in the account.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /users
 #'
@@ -406,7 +406,7 @@ pp_get_personas_vector <- function() {
 pp_get_users <- function(
     ...
 ) {
-  pp("get /users",
+ .pp("get /users",
      ... = ...,
      .unnest = TRUE
   )
@@ -420,7 +420,7 @@ pp_get_users <- function(
 #'
 #' @param id Numeric ID of the user.
 #'
-#' @param ... Other arguments passed to [pp()]
+#' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @note GET /user/{id}
 #'
@@ -430,7 +430,7 @@ pp_get_user <- function(
     id = NULL,
     ...
 ) {
-  pp("/users/{id}",
+ .pp("/users/{id}",
      id = id,
      ... = ...
      # .unnest_element = NULL

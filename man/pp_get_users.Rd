@@ -7,7 +7,7 @@
 pp_get_users(...)
 }
 \arguments{
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \value{
 Tibble with user information

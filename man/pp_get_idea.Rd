@@ -13,7 +13,7 @@ pp_get_idea(id = NULL, expand = FALSE, by_project_id = FALSE, ...)
 
 \item{by_project_id}{Whether the ID represents the project_id instead of the numeric ID.}
 
-\item{...}{Other arguments passed to \code{\link[=pp]{pp()}}}
+\item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
 Use the numeric ID to return an idea. You can get a simple version of the idea or an expanded one using the expanded parameter which returns the business case, functional specs, notes, user stories, comments and other linked data.
