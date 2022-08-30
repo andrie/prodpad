@@ -12,7 +12,7 @@
 #' @importFrom magrittr set_attr
 pp_get_products <- function() {
   res <- .pp("/products", group = FALSE)
-  count <- res[["product_count"]]
+  count <- attr(res, "count")
   res$productlines %>%
     map_dfr(~.$products %>% pp_unnest()) %>%
     set_attr("count", count)

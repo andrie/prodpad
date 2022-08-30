@@ -192,15 +192,29 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
     attributes(res) <- res_attr
   }
 
+  # extract _count element, if it exists
+  idx <- which(grepl("_count", names(res)))
+  count <-
+    if (length(idx)) res[[idx]] else length(res)
+
+  # unnest if necessary
   if (isTRUE(.unnest)) {
-    if (!is.null(.unnest_element)) {
-      pp_unnest(res[[.unnest_element]], .unnest_dont_unlist = .unnest_dont_unlist )
-    } else {
-      pp_unnest(res, .unnest_dont_unlist = .unnest_dont_unlist)
-    }
-  } else {
-    res
+    z <-
+      if (!is.null(.unnest_element)) {
+        res[[.unnest_element]] %>%
+          pp_unnest(.unnest_dont_unlist = .unnest_dont_unlist )
+      } else {
+        res %>%
+          pp_unnest(.unnest_dont_unlist = .unnest_dont_unlist)
+      }
+    res <-
+      z %>%
+      mutate(across(starts_with("created_at"), parse_prodpad_date)) %>%
+      mutate(across(starts_with("updated_at"), parse_prodpad_date))
   }
+
+  attr(res, "count") <- count
+  res
 
 }
 
