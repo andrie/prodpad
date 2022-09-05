@@ -9,13 +9,16 @@ pp_get_ideas(
   product = NULL,
   persona = NULL,
   status = NULL,
-  state = c("active", "active_public", "archived"),
-  size = 20,
+  state = c("all", "active", "active public", "archived", "unsorted"),
+  page = 1,
+  size = 100,
+  .limit = Inf,
   ...
 )
 }
 \arguments{
-\item{tags}{One or more tag names to filter the ideas by. These act as an OR not AND}
+\item{tags}{One or more tag names to filter the ideas by. These act as an OR
+not AND}
 
 \item{product}{Name of a product to filter the ideas by.}
 
@@ -23,7 +26,10 @@ pp_get_ideas(
 
 \item{status}{Name of a workflow status to filter the ideas by.}
 
-\item{state}{Filters the returned ideas based on their state. Active Public is same as portal in the UI. If not included then the endpoint returns all active and active_public the same as the UI.}
+\item{state}{Filters the returned ideas based on their state. Active Public
+is same as portal in the UI. If not included then the endpoint returns all
+active and active_public the same as the UI. "all" returns all unsorted and
+active ideas.}
 
 \item{size}{The number of results per page}
 

@@ -45,7 +45,11 @@ pp_error <- function(response, call = rlang::caller_env()) {
   res <- content(response)
   status <- status_code(response)
 
-  msg <- "Prodpad API error ({status}): {heads$status %||% ''} {res$user_message}"
+  msg <- "Prodpad API error ({status}): {heads$status %||% ''} {res$error$message}"
+
+  if (status == 400) {
+    msg <- c(msg, x = c("Access denied: {.url {response$request$url}}"))
+  }
 
   if (status == 401) {
     msg <- c(msg, x = c("The call was not authenticated: {.url {response$request$url}}"))
@@ -60,11 +64,16 @@ pp_error <- function(response, call = rlang::caller_env()) {
     msg <- c(msg, c("i" = "Read more at {.url {doc_url}}"))
   }
 
-  errors <- res$errors
+  errors <- res$error
+  if (is.null(errors)) {
+    errors <- res
+  }
   if (!is.null(errors)) {
     errors <- as.data.frame(do.call(rbind, errors))
-    nms <- c("resource", "field", "code", "message")
-    nms <- nms[nms %in% names(errors)]
+    # nms <- c("resource", "field", "code", "message")
+    # nms <- c("code", "message")
+    # nms <- nms[nms %in% names(errors)]
+    nms <- names(errors)
     msg <- c(
       msg,
       capture.output(print(errors[nms], row.names = FALSE))

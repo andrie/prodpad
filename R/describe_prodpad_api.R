@@ -25,12 +25,16 @@ describe_api <- function(max.level = 4) {
 
 #' Describe prodpad API paths.
 #'
+#' @param search Filter path for rows containing the filter tearm
+#'
 #' @keywords internal
 #' @examplesIf FALSE
 #' prodpad:::describe_api_paths()
-describe_api_paths <- function() {
+describe_api_paths <- function(search = "") {
   prodpad_api_v1$paths %>%
-    purrr::map_dfr(~tibble(verb = names(.)), .id = "path")
+    purrr::map_dfr(~tibble::tibble(verb = names(.)), .id = "path") %>%
+    dplyr::filter(grepl(search, path)) %>%
+    identity()
 }
 
 

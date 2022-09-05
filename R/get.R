@@ -55,7 +55,8 @@ pp_get_tags_vector <- function() {
 
 #' Get list of ideas.
 #'
-#' @param tags One or more tag names to filter the ideas by. These act as an OR not AND
+#' @param tags One or more tag names to filter the ideas by. These act as an OR
+#'   not AND
 #'
 #' @param product Name of a product to filter the ideas by.
 #'
@@ -63,7 +64,10 @@ pp_get_tags_vector <- function() {
 #'
 #' @param status Name of a workflow status to filter the ideas by.
 #'
-#' @param state Filters the returned ideas based on their state. Active Public is same as portal in the UI. If not included then the endpoint returns all active and active_public the same as the UI.
+#' @param state Filters the returned ideas based on their state. Active Public
+#'   is same as portal in the UI. If not included then the endpoint returns all
+#'   active and active_public the same as the UI. "all" returns all unsorted and
+#'   active ideas.
 #'
 #' @param size The number of results per page
 #'
@@ -78,22 +82,29 @@ pp_get_ideas <- function(
     product = NULL,
     persona = NULL,
     status = NULL,
-    state = c("active", "active_public", "archived"),
-    size = 20,
+    state = c("all", "active", "active public", "archived", "unsorted"),
+    page = 1,
+    size = 100,
+    .limit = Inf,
     ...
 ) {
-  state <- match.arg(state)
+  if (!is.null(state)) state <- match.arg(state)
 
- .pp("/ideas",
-     tags = tags,
-     product = product,
-     persona = persona,
-     status = status,
-     state = state,
-     size = size,
-     ...,
-     .unnest_element = "ideas"
-  )
+  get_one <- function(page, size) {
+    .pp("/ideas",
+        tags = tags,
+        product = product,
+        persona = persona,
+        status = status,
+        state = state,
+        size = size,
+        ...,
+        .unnest_element = "ideas"
+    )
+  }
+
+  # get_one(page = page, size = size, .limit = .limit)
+  page_all_requests(get_one, page = page, size = size, .limit = .limit)
 }
 
 

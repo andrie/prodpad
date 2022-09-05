@@ -12,7 +12,8 @@ pp_get_feedback(id = NULL, ...)
 \item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
-Return an individual piece of feedback. The feedback is returned with the details of the contact that provided the piece of feedback.
+Return an individual piece of feedback. The feedback is returned with the
+details of the contact that provided the piece of feedback.
 }
 \note{
 GET /feedbacks/{id}

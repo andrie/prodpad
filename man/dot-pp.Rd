@@ -17,6 +17,7 @@
   .send_headers = NULL,
   .progress = TRUE,
   .params = list(),
+  .api_version = 1,
   .unnest = !is.null(.unnest_element),
   .unnest_element = NULL,
   .unnest_dont_unlist = NULL

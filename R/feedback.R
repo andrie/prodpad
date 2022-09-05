@@ -1,4 +1,5 @@
 
+
 #' Get tibble of feedbacks.
 #'
 #' Returns a tibble of feedback which can be a straight list or grouped by
@@ -27,9 +28,9 @@
 #'   the company for the associated company.
 #'
 #' @param company_value Set to filter the feedback results based on the value of
-#'   the company for the company assocaited to the feedback.
+#'   the company for the company associated to the feedback.
 #'
-#' @param customer Can be either numeric ID, UUID of a contac or contact email.
+#' @param customer Can be either numeric ID, UUID of a contact or contact email.
 #'
 #' @param product Filter results by the product associated to feedback. Can
 #'   either be the product UUID or product ID.
@@ -41,7 +42,7 @@
 #'   the feedback. Use the JobRole UUID.
 #'
 #' @param tags Filter feedback results by the tags associated to the feedback.
-#'   Mulitple tags can be specified and acts as an OR. Use the tag ID or UUID.
+#'   Multiple tags can be specified and acts as an OR. Use the tag ID or UUID.
 #'
 #' @param has_ideas Whether the feedback is associated to one or more ideas.
 #'   Default is either.
@@ -109,39 +110,9 @@ pp_get_feedbacks <- function(
     )
   }
 
-
-  get_all <- function(f, page = page, size = size, .limit = .limit) {
-    if (is.null(.limit)) .limit <- size
-    if (.limit < size) size <- .limit
-
-    # get the first tibble
-    z <- match.fun(f)(page = page, size = size)
-    print(glue::glue("> Page: {page}, nrow(z): {nrow(z)})"))
-    if (nrow(z) == 0) return(z)
-
-    if (nrow(z) == 0) return(z)
-    .returned <- if (is.na(get_count(z))) .returned <- nrow(z)
-    .count <- min(get_count(z), .limit, na.rm = TRUE)
-
-    # get all subsequent tibbles
-    while (nrow(z) < max(.limit, .returned) && .returned == size) {
-      page <- page + 1
-      print(glue::glue("> Page: {page}, nrow(z): {nrow(z)})"))
-      if(.limit < Inf) size <- min(size, .limit - nrow(z))
-      z2 <- match.fun(f)(page = page, size = size)
-      if (nrow(z2) == 0) return(z)
-      z <- dplyr::bind_rows(z, z2)
-    }
-    z
-  }
-
-  get_all(get_one, page = page, size = size, .limit = .limit)
+  page_all_requests(get_one, page = page, size = size, .limit = .limit)
 }
 
-
-get_count <- function(x) {
-  attr(x, "count")
-}
 
 #' Get a piece of feedback.
 #'

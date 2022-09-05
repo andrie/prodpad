@@ -116,11 +116,21 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
                .overwrite = FALSE, .api_url = NULL, .method = "GET",
                .limit = NULL, .accept = "application/json",
                .send_headers = NULL, .progress = TRUE, .params = list(),
+               .api_version = 1,
                .unnest = !is.null(.unnest_element),
                .unnest_element = NULL,
                .unnest_dont_unlist = NULL) {
 
   # browser()
+
+  if (is.null(.api_url)) {
+    .api_url <- switch(
+      as.character(.api_version),
+      "1" = "https://api.prodpad.com/v1",
+      "2" = "https://api.prodpad.com/api/v2",
+      stop(".api_version must be either 1 or 2")
+    )
+  }
 
   params <- c(list(...), .params)
   params <- drop_named_nulls(params)
@@ -195,7 +205,7 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
   # extract _count element, if it exists
   idx <- which(grepl("_count", names(res)))
   count <-
-    if (length(idx)) res[[idx]] else length(res)
+    if (length(idx)) res[[idx]] else NA_integer_
 
   # unnest if necessary
   if (isTRUE(.unnest)) {

@@ -5,7 +5,7 @@
 \title{Get tibble of feedbacks.}
 \usage{
 pp_get_feedbacks(
-  state = c("active", "archived", "unsorted", "all"),
+  state = c("all", "active", "archived", "unsorted"),
   company = NULL,
   company_country = NULL,
   company_size = NULL,
@@ -21,35 +21,51 @@ pp_get_feedbacks(
   group_by = FALSE,
   page = 1,
   size = 100,
+  .limit = NULL,
   ...
 )
 }
 \arguments{
-\item{state}{Set to value of \code{active} for active, \code{archived} for archived feedback, \code{unsorted} for unsorted feedback and \code{all} for all feedback. Default is \code{active}.}
+\item{state}{Set to value of \code{active} for active, \code{archived} for archived
+feedback, \code{unsorted} for unsorted feedback and \code{all} for all feedback.
+Default is \code{all}.}
 
-\item{company}{Set to filter the feedback results based on whether the feedback was entered for a contact linked to the company.}
+\item{company}{Set to filter the feedback results based on whether the
+feedback was entered for a contact linked to the company.}
 
-\item{company_country}{Set to filter the feedback results based on the country set for the associated company.}
+\item{company_country}{Set to filter the feedback results based on the
+country set for the associated company.}
 
-\item{company_size}{Set to filter the feedback results based on the size of the company for the associated company.}
+\item{company_size}{Set to filter the feedback results based on the size of
+the company for the associated company.}
 
-\item{company_value}{Set to filter the feedback results based on the value of the company for the company assocaited to the feedback.}
+\item{company_value}{Set to filter the feedback results based on the value of
+the company for the company associated to the feedback.}
 
-\item{customer}{Can be either numeric ID, UUID of a contac or contact email.}
+\item{customer}{Can be either numeric ID, UUID of a contact or contact email.}
 
-\item{product}{Filter results by the product associated to feedback. Can either be the product UUID or product ID.}
+\item{product}{Filter results by the product associated to feedback. Can
+either be the product UUID or product ID.}
 
-\item{persona}{Filter results by the persona associated to feedback. Can either be the persona UUID or persona ID.}
+\item{persona}{Filter results by the persona associated to feedback. Can
+either be the persona UUID or persona ID.}
 
-\item{job_role}{Filter results by the job role of the contact associated to the feedback. Use the JobRole UUID.}
+\item{job_role}{Filter results by the job role of the contact associated to
+the feedback. Use the JobRole UUID.}
 
-\item{tags}{Filter feedback results by the tags associated to the feedback. Mulitple tags can be specified and acts as an OR. Use the tag ID or UUID.}
+\item{tags}{Filter feedback results by the tags associated to the feedback.
+Multiple tags can be specified and acts as an OR. Use the tag ID or UUID.}
 
-\item{has_ideas}{Whether the feedback is associated to one or more ideas. Default is either.}
+\item{has_ideas}{Whether the feedback is associated to one or more ideas.
+Default is either.}
 
-\item{external_id}{Filter feedback to return the feedback associated with a specific External ID. An example of an external ID is the ID of a record in a CRM or ID of a ticket in a customer support application.}
+\item{external_id}{Filter feedback to return the feedback associated with a
+specific External ID. An example of an external ID is the ID of a record in
+a CRM or ID of a ticket in a customer support application.}
 
-\item{external_url}{Filter feedback to return the feedback associated with a specific external url. An example of an external url is that of a record in a CRM or a ticket in a customer support application}
+\item{external_url}{Filter feedback to return the feedback associated with a
+specific external url. An example of an external url is that of a record in
+a CRM or a ticket in a customer support application}
 
 \item{group_by}{Setting to customer will group the feedback by customer}
 
@@ -57,13 +73,18 @@ pp_get_feedbacks(
 
 \item{size}{For setting the number of results per page. Default is 100.}
 
+\item{.limit}{The maximum number of elements to return}
+
 \item{...}{Other arguments passed to \url{.pp()}]}
 }
 \value{
 tibble
 }
 \description{
-Returns a tibble of feedback which can be a straight list or grouped by contact using the group_by parameter.  The list can also be filtered by state query parameter for active, archived, unsorted or all.Note that by default only active feedback is returned.
+Returns a tibble of feedback which can be a straight list or grouped by
+contact using the group_by parameter.  The list can also be filtered by state
+query parameter for active, archived, unsorted or all.Note that by default
+only active feedback is returned.
 }
 \note{
 GET /feedbacks

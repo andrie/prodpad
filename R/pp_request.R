@@ -120,7 +120,7 @@ pp_set_url <- function(x) {
     x$url <- URLencode(x$endpoint)
     x$api_url <- get_baseurl(x$url)
   } else {
-    x$api_url <- get_apiurl(x$api_url %||% default_api_url())
+    x$api_url <- x$api_url %||% default_api_url()
     x$url <- URLencode(paste0(x$api_url, x$endpoint))
   }
 
@@ -148,23 +148,11 @@ get_hosturl <- function(url) {
   normalize_host(url)
 }
 
-# (almost) the inverse of get_hosturl()
-# https://github.com     --> https://api.github.com
-# https://github.uni.edu --> https://github.uni.edu/api/v3
-get_apiurl <- function(url) {
-  host_url <- get_hosturl(url)
-  prot_host <- strsplit(host_url, "://", fixed = TRUE)[[1]]
-  if (is_prodpad_dot_com(host_url)) {
-    paste0(prot_host[[1]], "://api.prodpad.com/v1")
-  } else {
-    paste0(host_url, "/api/v1")
-  }
-}
 
 is_prodpad_dot_com <- function(url) {
   url <- get_baseurl(url)
   url <- normalize_host(url)
-  grepl("^https?://prodpad.com", url)
+  grepl("^https?://.*prodpad.com", url)
 }
 
 pp_set_headers <- function(x) {
