@@ -34,13 +34,16 @@
     <loc>https://andrie.github.io/prodpad/reference/describe_api_paths.html</loc>
   </url>
   <url>
+    <loc>https://andrie.github.io/prodpad/reference/dot-pp.html</loc>
+  </url>
+  <url>
     <loc>https://andrie.github.io/prodpad/reference/index.html</loc>
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/parse_prodpad_date.html</loc>
   </url>
   <url>
-    <loc>https://andrie.github.io/prodpad/reference/pp.html</loc>
+    <loc>https://andrie.github.io/prodpad/reference/pp_archive_feedback.html</loc>
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/pp_get_companies.html</loc>
@@ -49,10 +52,16 @@
     <loc>https://andrie.github.io/prodpad/reference/pp_get_companies_vector.html</loc>
   </url>
   <url>
+    <loc>https://andrie.github.io/prodpad/reference/pp_get_contact.html</loc>
+  </url>
+  <url>
     <loc>https://andrie.github.io/prodpad/reference/pp_get_contacts.html</loc>
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/pp_get_contacts_vector.html</loc>
+  </url>
+  <url>
+    <loc>https://andrie.github.io/prodpad/reference/pp_get_feedback.html</loc>
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/pp_get_feedbacks.html</loc>
@@ -83,6 +92,15 @@
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/pp_get_tags_vector.html</loc>
+  </url>
+  <url>
+    <loc>https://andrie.github.io/prodpad/reference/pp_get_user.html</loc>
+  </url>
+  <url>
+    <loc>https://andrie.github.io/prodpad/reference/pp_get_users.html</loc>
+  </url>
+  <url>
+    <loc>https://andrie.github.io/prodpad/reference/pp_post_feedback.html</loc>
   </url>
   <url>
     <loc>https://andrie.github.io/prodpad/reference/prodpad-package.html</loc>
