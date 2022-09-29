@@ -1,6 +1,6 @@
 Package: prodpad
 Title: R Client for the ProdPad API
-Version: 0.0.1.9000
+Version: 0.0.2.9000
 Authors@R: 
     c(person("Andrie", "de Vries", role = c("aut", "cre"), email = "andrie@rstudio.com"),
     person(given = "RStudio", role = c("cph", "fnd")))
