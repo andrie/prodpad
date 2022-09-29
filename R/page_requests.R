@@ -1,5 +1,6 @@
 page_all_requests <- function(f, page, size, .limit) {
   # browser()
+
   if (is.null(.limit)) .limit <- size
   if (.limit < size) size <- .limit
 
@@ -9,7 +10,8 @@ page_all_requests <- function(f, page, size, .limit) {
 
   if (nrow(z) == 0) return(z)
   returned <- nrow(z)
-  if (!is.na(get_count(z))) .limit <- get_count(z)
+  gcz <- get_count(z)
+  if (!is.na(gcz) && gcz < .limit) { .limit <- get_count(z) }
   returned <- nrow(z)
   count <- min(get_count(z), .limit, na.rm = TRUE)
 
@@ -27,6 +29,6 @@ page_all_requests <- function(f, page, size, .limit) {
 }
 
 get_count <- function(x) {
-  attr(x, "count")
+  attr(x, "count") %||% NA
 }
 

@@ -85,10 +85,11 @@ pp_get_ideas <- function(
     state = c("all", "active", "active public", "archived", "unsorted"),
     page = 1,
     size = 100,
-    .limit = Inf,
+    .limit = 100,
     ...
 ) {
   if (!is.null(state)) state <- match.arg(state)
+  if (size > .limit) size <- .limit
 
   get_one <- function(page, size) {
     .pp("/ideas",
