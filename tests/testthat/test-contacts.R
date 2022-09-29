@@ -13,27 +13,24 @@ test_that("get", {
   )
 
   expect_tbl(
-    pp_get_feedbacks(size = 7), nrow = 7, ncol = 23
+    pp_get_feedbacks(size = 7), nrow = 7, ncol = 24
   )
 
   expect_tbl(
-    pp_get_ideas(size = 9), nrow = 9, ncol = 20
+    pp_get_ideas(.limit = 9, size = 100), nrow = 9, ncol = 21
   )
 
   expect_tbl(
-    pp_get_products(), ncol = 13
+    pp_get_products(), ncol = 14
   )
 
   expect_true(
     pp_get_products() %>% attr("count") > 0
   )
 
-  expect_tbl(
-    pp_get_ideas(size = 6), nrow = 6, ncol = 20
-  )
 
   expect_tbl(
-    pp_get_idea_feedback("633051"), ncol = 23
+    pp_get_idea_feedback("633051"), ncol = 24
   )
 
   expect_tbl(
@@ -45,7 +42,7 @@ test_that("get", {
   )
 
   expect_tbl(
-    pp_get_personas(), ncol = 7
+    pp_get_personas(), ncol = 8
   )
 
   expect_tbl(
