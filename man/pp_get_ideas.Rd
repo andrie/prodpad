@@ -12,7 +12,7 @@ pp_get_ideas(
   state = c("all", "active", "active public", "archived", "unsorted"),
   page = 1,
   size = 100,
-  .limit = Inf,
+  .limit = 100,
   ...
 )
 }
