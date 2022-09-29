@@ -24,7 +24,7 @@ library(tidyr)
 library(reactable)
 library(purrr)
 
-roughstuff <- pp_get_feedbacks(tags = params$tag, product = "RStudio Connect")
+roughstuff <- pp_get_feedbacks(tags = params$tag, product = "RStudio Connect", .limit = 1000)
 
 roughstuff %>% 
   select(id = id, tags) %>% 
