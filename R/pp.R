@@ -37,10 +37,10 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 #' * Convert the response to an R list using [jsonlite::fromJSON()].
 #'
 #' @param endpoint Prodpad API endpoint. Must be one of the following forms:
-#'    * `METHOD path`, e.g. `GET /rate_limit`,
-#'    * `path`, e.g. `/rate_limit`,
-#'    * `METHOD url`, e.g. `GET https://api.github.com/rate_limit`,
-#'    * `url`, e.g. `https://api.github.com/rate_limit`.
+#'    * `METHOD path`, e.g. `GET /feedbacks`,
+#'    * `path`, e.g. `/feedbacks`,
+#'    * `METHOD url`, e.g. `GET https://api.prodpad.com/v1/feedbacks`,
+#'    * `url`, e.g. `https://api.prodpad.com/v1/feedbacks`.
 #'
 #'    If the method is not supplied, will use `.method`, which defaults
 #'    to `"GET"`.
@@ -65,8 +65,8 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 #' @param .overwrite If `.destfile` is provided, whether to overwrite an
 #'   existing file.  Defaults to `FALSE`.
 #'
-#' @param .api_url Github API url (default: <https://api.github.com>). Used
-#'   if `endpoint` just contains a path. Defaults to `GITHUB_API_URL`
+#' @param .api_url Prodpad API url (default: <https://api.prodpad.com/v1>). Used
+#'   if `endpoint` just contains a path. Defaults to `PRODPAD_API_URL`
 #'   environment variable if set.
 #'
 #' @param .method HTTP method to use if not explicitly supplied in the
@@ -74,15 +74,15 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 #'
 #' @param .limit Number of records to return. This can be used
 #'   instead of manual pagination. By default it is `NULL`,
-#'   which means that the defaults of the GitHub API are used.
+#'   which means that the defaults of the Prodpad API are used.
 #'   You can set it to a number to request more (or less)
 #'   records, and also to `Inf` to request all records.
-#'   Note, that if you request many records, then multiple GitHub
+#'   Note, that if you request many records, then multiple Prodpad
 #'   API calls are used to get them, and this can take a potentially
 #'   long time.
 #'
 #' @param .accept The value of the `Accept` HTTP header. Defaults to
-#'   `"application/vnd.github.v3+json"` . If `Accept` is given in
+#'   `"application/json` . If `Accept` is given in
 #'   `.send_headers`, then that will be used. This parameter can be used to
 #'   provide a custom media type, in order to access a preview feature of
 #'   the API.
@@ -90,7 +90,7 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 #' @param .send_headers Named character vector of header field values
 #'   (except `Authorization`, which is handled via `.token`). This can be
 #'   used to override or augment the default `User-Agent` header:
-#'   `"https://github.com/r-lib/gh"`.
+#'   `"https://github.com/andrie/prodpad"`.
 #'
 #' @param .progress Whether to show a progress indicator for calls that
 #'   need more than one HTTP request.
@@ -98,6 +98,8 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 #' @param .params Additional list of parameters to append to `...`.
 #'   It is easier to use this than `...` if you have your parameters in
 #'   a list already.
+#'
+#' @param .api_version This must be `1`.
 #'
 #' @param .unnest If TRUE, unnests the result object
 #'
@@ -132,6 +134,17 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
     )
   }
 
+  if (.api_version == 1 && Sys.getenv("PRODPAD_API_KEY") == "") {
+    stop(
+      "You must set the PRODPAD_API_KEY env var for authentication. ",
+      "Use browse_api_key() to find your API key.",
+      call. = FALSE
+      )
+  }
+
+
+
+
   params <- c(list(...), .params)
   params <- drop_named_nulls(params)
 
@@ -164,35 +177,35 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
   res <- pp_process_response(raw)
   len <- pp_response_length(res)
 
-  while (!is.null(.limit) && len < .limit && pp_has_next(res)) {
-    if (.progress) update_progress_bar(prbr, res)
-    res2 <- pp_next(res)
-
-    if (!is.null(names(res2)) && identical(names(res), names(res2))) {
-      res3 <- mapply( # Handle named array case
-        function(x, y, n) { # e.g. GET /search/repositories
-          z <- c(x, y)
-          atm <- is.atomic(z)
-          if (atm && n %in% c("total_count", "incomplete_results")) {
-            y
-          } else if (atm) {
-            unique(z)
-          } else {
-            z
-          }
-        },
-        res, res2, names(res),
-        SIMPLIFY = FALSE
-      )
-    } else { # Handle unnamed array case
-      res3 <- c(res, res2) # e.g. GET /orgs/:org/invitations
-    }
-
-    len <- len + pp_response_length(res2)
-
-    attributes(res3) <- attributes(res2)
-    res <- res3
-  }
+  # while (!is.null(.limit) && len < .limit && pp_has_next(res)) {
+  #   if (.progress) update_progress_bar(prbr, res)
+  #   res2 <- pp_next(res)
+  #
+  #   if (!is.null(names(res2)) && identical(names(res), names(res2))) {
+  #     res3 <- mapply( # Handle named array case
+  #       function(x, y, n) { # e.g. GET /search/repositories
+  #         z <- c(x, y)
+  #         atm <- is.atomic(z)
+  #         if (atm && n %in% c("total_count", "incomplete_results")) {
+  #           y
+  #         } else if (atm) {
+  #           unique(z)
+  #         } else {
+  #           z
+  #         }
+  #       },
+  #       res, res2, names(res),
+  #       SIMPLIFY = FALSE
+  #     )
+  #   } else { # Handle unnamed array case
+  #     res3 <- c(res, res2) # e.g. GET /orgs/:org/invitations
+  #   }
+  #
+  #   len <- len + pp_response_length(res2)
+  #
+  #   attributes(res3) <- attributes(res2)
+  #   res <- res3
+  # }
 
   # We only subset for a non-named response.
   if (!is.null(.limit) && len > .limit &&
@@ -219,8 +232,8 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
       }
     res <-
       z %>%
-      mutate(across(starts_with("created_at"), parse_prodpad_date)) %>%
-      mutate(across(starts_with("updated_at"), parse_prodpad_date))
+      mutate(dplyr::across(dplyr::starts_with("created_at"), parse_prodpad_date)) %>%
+      mutate(dplyr::across(dplyr::starts_with("updated_at"), parse_prodpad_date))
   }
 
   attr(res, "count") <- count

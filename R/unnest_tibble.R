@@ -18,6 +18,7 @@ unnull_and_tibble <- function(x) {
 #' @return A modified tibble
 #'
 #' @importFrom tidyr unnest_longer unnest_wider
+#' @importFrom rlang `:=`
 unnest_tibble <- function(.data, .col) {
   .data %>%
     mutate({{ .col }} := {{ .col }} %>%  map(unnull_and_tibble)) %>%

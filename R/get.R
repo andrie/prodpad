@@ -69,7 +69,11 @@ pp_get_tags_vector <- function() {
 #'   active and active_public the same as the UI. "all" returns all unsorted and
 #'   active ideas.
 #'
+#' @param page Page of results to return
+#'
 #' @param size The number of results per page
+#'
+#' @param .limit The maximum number of elements to return.
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'

@@ -10,7 +10,6 @@ pp_post_feedback(
   product_id,
   product_name = NA,
   feedback,
-  company_id = NULL,
   ...
 )
 }
@@ -18,23 +17,17 @@ pp_post_feedback(
 \item{contact_id}{\verb{string($uuid)} ID of the contact providing the feedback.
 Either Contact ID or Contact name is required.}
 
+\item{contact_name}{\code{string} Name of the contact providing the feedback. Either
+Contact ID or Contact name is required.}
+
+\item{product_id}{Product id. See \code{\link[=pp_get_products]{pp_get_products()}}}
+
+\item{product_name}{Product name. See \code{\link[=pp_get_products]{pp_get_products()}}}
+
 \item{feedback}{\code{string} (Required) The feedback. This field accepts HTML and
 is stored as UTF-8.}
 
-\item{company_id}{\verb{string($uuid)} UUID of the company to link the contact to.
-The UUID can be determined using /GET companies endpoint.}
-
 \item{...}{Other arguments passed to \url{.pp()}]}
-
-\item{name}{\code{string} Name of the contact providing the feedback. Either
-Contact ID or Contact name is required.}
-
-\item{email}{\code{string} The email of the contact. This is used to avoid
-duplication of contacts. This can be any unique ID for each contact.}
-
-\item{about}{\code{string} Text field about the contact. This will overright the
-existing about if the contact already exists. This field accepts HTML and
-is stored as UTF-8.}
 }
 \description{
 Create a new feedback in the account. The feedback has to have either a name

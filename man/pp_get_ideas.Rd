@@ -31,7 +31,11 @@ is same as portal in the UI. If not included then the endpoint returns all
 active and active_public the same as the UI. "all" returns all unsorted and
 active ideas.}
 
+\item{page}{Page of results to return}
+
 \item{size}{The number of results per page}
+
+\item{.limit}{The maximum number of elements to return.}
 
 \item{...}{Other arguments passed to \url{.pp()}]}
 }

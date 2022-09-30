@@ -21,10 +21,10 @@ Imports:
     magrittr,
     cli,
     clipr,
-    lubridate,
-    stringr
+    lubridate
 Suggests: 
     shinycssloaders,
+    R6,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/Needs/website: tidyverse/tidytemplate

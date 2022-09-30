@@ -26,10 +26,10 @@
 \arguments{
 \item{endpoint}{Prodpad API endpoint. Must be one of the following forms:
 \itemize{
-\item \verb{METHOD path}, e.g. \code{GET /rate_limit},
-\item \code{path}, e.g. \verb{/rate_limit},
-\item \verb{METHOD url}, e.g. \verb{GET https://api.github.com/rate_limit},
-\item \code{url}, e.g. \verb{https://api.github.com/rate_limit}.
+\item \verb{METHOD path}, e.g. \code{GET /feedbacks},
+\item \code{path}, e.g. \verb{/feedbacks},
+\item \verb{METHOD url}, e.g. \verb{GET https://api.prodpad.com/v1/feedbacks},
+\item \code{url}, e.g. \verb{https://api.prodpad.com/v1/feedbacks}.
 }
 
 If the method is not supplied, will use \code{.method}, which defaults
@@ -55,8 +55,8 @@ response will be written to disk in the form sent.}
 \item{.overwrite}{If \code{.destfile} is provided, whether to overwrite an
 existing file.  Defaults to \code{FALSE}.}
 
-\item{.api_url}{Github API url (default: \url{https://api.github.com}). Used
-if \code{endpoint} just contains a path. Defaults to \code{GITHUB_API_URL}
+\item{.api_url}{Prodpad API url (default: \url{https://api.prodpad.com/v1}). Used
+if \code{endpoint} just contains a path. Defaults to \code{PRODPAD_API_URL}
 environment variable if set.}
 
 \item{.method}{HTTP method to use if not explicitly supplied in the
@@ -64,15 +64,15 @@ environment variable if set.}
 
 \item{.limit}{Number of records to return. This can be used
 instead of manual pagination. By default it is \code{NULL},
-which means that the defaults of the GitHub API are used.
+which means that the defaults of the Prodpad API are used.
 You can set it to a number to request more (or less)
 records, and also to \code{Inf} to request all records.
-Note, that if you request many records, then multiple GitHub
+Note, that if you request many records, then multiple Prodpad
 API calls are used to get them, and this can take a potentially
 long time.}
 
 \item{.accept}{The value of the \code{Accept} HTTP header. Defaults to
-\code{"application/vnd.github.v3+json"} . If \code{Accept} is given in
+\verb{"application/json} . If \code{Accept} is given in
 \code{.send_headers}, then that will be used. This parameter can be used to
 provide a custom media type, in order to access a preview feature of
 the API.}
@@ -80,7 +80,7 @@ the API.}
 \item{.send_headers}{Named character vector of header field values
 (except \code{Authorization}, which is handled via \code{.token}). This can be
 used to override or augment the default \code{User-Agent} header:
-\code{"https://github.com/r-lib/gh"}.}
+\code{"https://github.com/andrie/prodpad"}.}
 
 \item{.progress}{Whether to show a progress indicator for calls that
 need more than one HTTP request.}
@@ -88,6 +88,8 @@ need more than one HTTP request.}
 \item{.params}{Additional list of parameters to append to \code{...}.
 It is easier to use this than \code{...} if you have your parameters in
 a list already.}
+
+\item{.api_version}{This must be \code{1}.}
 
 \item{.unnest}{If TRUE, unnests the result object}
 

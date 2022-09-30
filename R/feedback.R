@@ -162,21 +162,25 @@ pp_get_feedback <- function(
 #' @param contact_id	`string($uuid)` ID of the contact providing the feedback.
 #'   Either Contact ID or Contact name is required.
 #'
-#' @param name	`string` Name of the contact providing the feedback. Either
+#' @param contact_name	`string` Name of the contact providing the feedback. Either
 #'   Contact ID or Contact name is required.
 #'
-#' @param company_id	`string($uuid)` UUID of the company to link the contact to.
-#'   The UUID can be determined using /GET companies endpoint.
+# @param company_id	`string($uuid)` UUID of the company to link the contact to.
+#   The UUID can be determined using /GET companies endpoint.
+#
+#' @param product_id Product id. See [pp_get_products()]
+#'
+#' @param product_name Product name. See [pp_get_products()]
 #'
 #' @param feedback	`string` (Required) The feedback. This field accepts HTML and
 #'   is stored as UTF-8.
 #'
-#' @param email	`string` The email of the contact. This is used to avoid
-#'   duplication of contacts. This can be any unique ID for each contact.
-#'
-#' @param about	`string` Text field about the contact. This will overright the
-#'   existing about if the contact already exists. This field accepts HTML and
-#'   is stored as UTF-8.
+# @param email	`string` The email of the contact. This is used to avoid
+#   duplication of contacts. This can be any unique ID for each contact.
+#
+# @param about	`string` Text field about the contact. This will overwrite the
+#   existing about if the contact already exists. This field accepts HTML and
+#   is stored as UTF-8.
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
@@ -189,7 +193,7 @@ pp_post_feedback <- function(
     product_id,
     product_name = NA,
     feedback,
-    company_id = NULL,
+    # company_id = NULL,
     ...
 ) {
   feedback <- as.character(feedback)

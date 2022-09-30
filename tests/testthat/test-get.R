@@ -6,7 +6,7 @@ test_that("get", {
   )
 
   expect_tbl(
-    pp_get_feedbacks(size = 7), nrow = 7, ncol = 25
+    pp_get_feedbacks(size = 7), nrow = 7, ncol = 24
   )
 
   expect_tbl(

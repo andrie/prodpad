@@ -1,4 +1,5 @@
 
+if (require("R6", quietly = TRUE)) {
 Pager <- R6::R6Class(
   "Pager",
   public = list(
@@ -25,12 +26,15 @@ Pager <- R6::R6Class(
     }
   )
 )
+}
 
 
 
 
 
-test_that("pager works", {
+test_that("pager class works", {
+  skip_if_not_installed("R6")
+
   p <- Pager$new(10)
   expect_equal(p$call(), 10)
   expect_equal(p$call(4), 6)
@@ -44,8 +48,11 @@ test_that("pager works", {
 })
 
 
-test_that("pager works", {
+test_that("page_all_requests works", {
+  skip_if_not_installed("R6")
+
   p <- Pager$new(10)
+
   get_one <- function(page, size) {
     p$call_df(size)
   }
@@ -61,3 +68,7 @@ test_that("pager works", {
 })
 
 
+test_that("paging works on ideas", {
+  skip_if_not_installed("R6")
+  expect_tbl(pp_get_ideas(size = 11, .limit = 20), nrow = 20)
+})
