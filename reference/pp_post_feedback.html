@@ -63,7 +63,6 @@ an existing contact.</p>
 <span>  <span class="va">product_id</span>,</span>
 <span>  product_name <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  <span class="va">feedback</span>,</span>
-<span>  company_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -75,34 +74,26 @@ an existing contact.</p>
 Either Contact ID or Contact name is required.</p></dd>
 
 
+<dt>contact_name</dt>
+<dd><p><code>string</code> Name of the contact providing the feedback. Either
+Contact ID or Contact name is required.</p></dd>
+
+
+<dt>product_id</dt>
+<dd><p>Product id. See <code><a href="pp_get_products.html">pp_get_products()</a></code></p></dd>
+
+
+<dt>product_name</dt>
+<dd><p>Product name. See <code><a href="pp_get_products.html">pp_get_products()</a></code></p></dd>
+
+
 <dt>feedback</dt>
 <dd><p><code>string</code> (Required) The feedback. This field accepts HTML and
 is stored as UTF-8.</p></dd>
 
 
-<dt>company_id</dt>
-<dd><p><code>string($uuid)</code> UUID of the company to link the contact to.
-The UUID can be determined using /GET companies endpoint.</p></dd>
-
-
 <dt>...</dt>
 <dd><p>Other arguments passed to <a href=".pp()">.pp()</a>]</p></dd>
-
-
-<dt>name</dt>
-<dd><p><code>string</code> Name of the contact providing the feedback. Either
-Contact ID or Contact name is required.</p></dd>
-
-
-<dt>email</dt>
-<dd><p><code>string</code> The email of the contact. This is used to avoid
-duplication of contacts. This can be any unique ID for each contact.</p></dd>
-
-
-<dt>about</dt>
-<dd><p><code>string</code> Text field about the contact. This will overright the
-existing about if the contact already exists. This field accepts HTML and
-is stored as UTF-8.</p></dd>
 
 </dl></div>
     <div class="section level2">

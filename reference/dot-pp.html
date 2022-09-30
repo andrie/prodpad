@@ -101,10 +101,10 @@ body, as JSON.</p></li>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>endpoint</dt>
-<dd><p>Prodpad API endpoint. Must be one of the following forms:</p><ul><li><p><code>METHOD path</code>, e.g. <code>GET /rate_limit</code>,</p></li>
-<li><p><code>path</code>, e.g. <code>/rate_limit</code>,</p></li>
-<li><p><code>METHOD url</code>, e.g. <code>GET https://api.github.com/rate_limit</code>,</p></li>
-<li><p><code>url</code>, e.g. <code>https://api.github.com/rate_limit</code>.</p></li>
+<dd><p>Prodpad API endpoint. Must be one of the following forms:</p><ul><li><p><code>METHOD path</code>, e.g. <code>GET /feedbacks</code>,</p></li>
+<li><p><code>path</code>, e.g. <code>/feedbacks</code>,</p></li>
+<li><p><code>METHOD url</code>, e.g. <code>GET https://api.prodpad.com/v1/feedbacks</code>,</p></li>
+<li><p><code>url</code>, e.g. <code>https://api.prodpad.com/v1/feedbacks</code>.</p></li>
 </ul><p>If the method is not supplied, will use <code>.method</code>, which defaults
 to <code>"GET"</code>.</p></dd>
 
@@ -138,8 +138,8 @@ existing file.  Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt>.api_url</dt>
-<dd><p>Github API url (default: <a href="https://api.github.com" class="external-link">https://api.github.com</a>). Used
-if <code>endpoint</code> just contains a path. Defaults to <code>GITHUB_API_URL</code>
+<dd><p>Prodpad API url (default: <a href="https://api.prodpad.com/v1" class="external-link">https://api.prodpad.com/v1</a>). Used
+if <code>endpoint</code> just contains a path. Defaults to <code>PRODPAD_API_URL</code>
 environment variable if set.</p></dd>
 
 
@@ -151,17 +151,17 @@ environment variable if set.</p></dd>
 <dt>.limit</dt>
 <dd><p>Number of records to return. This can be used
 instead of manual pagination. By default it is <code>NULL</code>,
-which means that the defaults of the GitHub API are used.
+which means that the defaults of the Prodpad API are used.
 You can set it to a number to request more (or less)
 records, and also to <code>Inf</code> to request all records.
-Note, that if you request many records, then multiple GitHub
+Note, that if you request many records, then multiple Prodpad
 API calls are used to get them, and this can take a potentially
 long time.</p></dd>
 
 
 <dt>.accept</dt>
 <dd><p>The value of the <code>Accept</code> HTTP header. Defaults to
-<code>"application/vnd.github.v3+json"</code> . If <code>Accept</code> is given in
+<code>"application/json</code> . If <code>Accept</code> is given in
 <code>.send_headers</code>, then that will be used. This parameter can be used to
 provide a custom media type, in order to access a preview feature of
 the API.</p></dd>
@@ -171,7 +171,7 @@ the API.</p></dd>
 <dd><p>Named character vector of header field values
 (except <code>Authorization</code>, which is handled via <code>.token</code>). This can be
 used to override or augment the default <code>User-Agent</code> header:
-<code>"https://github.com/r-lib/gh"</code>.</p></dd>
+<code>"https://github.com/andrie/prodpad"</code>.</p></dd>
 
 
 <dt>.progress</dt>
@@ -183,6 +183,10 @@ need more than one HTTP request.</p></dd>
 <dd><p>Additional list of parameters to append to <code>...</code>.
 It is easier to use this than <code>...</code> if you have your parameters in
 a list already.</p></dd>
+
+
+<dt>.api_version</dt>
+<dd><p>This must be <code>1</code>.</p></dd>
 
 
 <dt>.unnest</dt>
