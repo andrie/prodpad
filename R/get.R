@@ -1,7 +1,4 @@
-
 # products ----------------------------------------------------------------
-
-
 
 #' Get tibble of products.
 #'
@@ -14,14 +11,12 @@ pp_get_products <- function() {
   res <- .pp("/products", group = FALSE)
   count <- attr(res, "count")
   res$productlines %>%
-    map_dfr(~.$products %>% pp_unnest()) %>%
+    map_dfr(~ .$products %>% pp_unnest()) %>%
     set_attr("count", count)
 }
 
 
 # tags --------------------------------------------------------------------
-
-
 
 #' Get tibble of products.
 #'
@@ -37,7 +32,7 @@ pp_get_products_vector <- function() {
 #' @family Tags
 #' @export
 pp_get_tags <- function() {
- .pp("/tags", .unnest = TRUE)
+  .pp("/tags", .unnest = TRUE)
 }
 
 #' Get vector of tags
@@ -51,7 +46,6 @@ pp_get_tags_vector <- function() {
 
 
 # ideas -------------------------------------------------------------------
-
 
 #' Get list of ideas.
 #'
@@ -82,29 +76,30 @@ pp_get_tags_vector <- function() {
 #'
 #' @importFrom tidyr hoist
 pp_get_ideas <- function(
-    tags = NULL,
-    product = NULL,
-    persona = NULL,
-    status = NULL,
-    state = c("all", "active", "active public", "archived", "unsorted"),
-    page = 1,
-    size = 100,
-    .limit = 100,
-    ...
+  tags = NULL,
+  product = NULL,
+  persona = NULL,
+  status = NULL,
+  state = c("all", "active", "active public", "archived", "unsorted"),
+  page = 1,
+  size = 100,
+  .limit = 100,
+  ...
 ) {
   if (!is.null(state)) state <- match.arg(state)
   if (size > .limit) size <- .limit
 
   get_one <- function(page, size) {
-    .pp("/ideas",
-        tags = tags,
-        product = product,
-        persona = persona,
-        status = status,
-        state = state,
-        size = size,
-        ...,
-        .unnest_element = "ideas"
+    .pp(
+      "/ideas",
+      tags = tags,
+      product = product,
+      persona = persona,
+      status = status,
+      state = state,
+      size = size,
+      ...,
+      .unnest_element = "ideas"
     )
   }
 
@@ -132,23 +127,21 @@ pp_get_ideas <- function(
 #'
 #' @export
 pp_get_idea <- function(
-    id = NULL,
-    expand = FALSE,
-    by_project_id = FALSE,
-    ...
+  id = NULL,
+  expand = FALSE,
+  by_project_id = FALSE,
+  ...
 ) {
- .pp("/ideas/{id}",
-     id = id,
-     expand = isTRUE(expand),
-     by_project_id = isTRUE(by_project_id),
-     ... = ...,
-     .unnest = FALSE
+  .pp(
+    "/ideas/{id}",
+    id = id,
+    expand = isTRUE(expand),
+    by_project_id = isTRUE(by_project_id),
+    ... = ...,
+    .unnest = FALSE
   ) %>%
     c() # drops attributes
 }
-
-
-
 
 
 #' Get feedback associated to an idea.
@@ -165,20 +158,20 @@ pp_get_idea <- function(
 #'
 #' @export
 pp_get_idea_feedback <- function(
-    id,
-    ...
+  id,
+  ...
 ) {
- .pp("/ideas/{id}/feedback",
-     id = id,
-     ... = ...,
-     .unnest = TRUE,
-     .unnest_dont_unlist = c("tags", "products", "personas")
+  .pp(
+    "/ideas/{id}/feedback",
+    id = id,
+    ... = ...,
+    .unnest = TRUE,
+    .unnest_dont_unlist = c("tags", "products", "personas")
   )
 }
 
 
 # companies ---------------------------------------------------------------
-
 
 #' Get a tibble of companies.
 #'
@@ -218,36 +211,42 @@ pp_get_idea_feedback <- function(
 #'
 #' @export
 pp_get_companies <- function(
-    name = NULL,
-    country = NULL,
-    company_size = NULL,
-    value = NULL,
-    city = NULL,
-    tags = NULL,
-    external_id = NULL,
-    external_url = NULL,
-    contacts = TRUE,
-    feedbacks = NULL,
-    page = NULL,
-    ...
+  name = NULL,
+  country = NULL,
+  company_size = NULL,
+  value = NULL,
+  city = NULL,
+  tags = NULL,
+  external_id = NULL,
+  external_url = NULL,
+  contacts = TRUE,
+  feedbacks = NULL,
+  page = 1,
+  size = 100,
+  .limit = size,
+  ...
 ) {
-  get_page <- function() {
- .pp("/companies",
-     country = country,
-     company_size = company_size,
-     value = value,
-     city = city,
-     tags = tags,
-     name = name,
-     external_id = external_id,
-     external_url = external_url,
-     contacts = contacts,
-     feedbacks = feedbacks,
-     page = page,
-     ... = ...,
-     .unnest_element = "companies"
-  )}
-  get_page() # todo: implement paging
+  if (size > .limit) size <- .limit
+  get_page <- function(page, size) {
+    .pp(
+      "/companies",
+      country = country,
+      company_size = company_size,
+      value = value,
+      city = city,
+      tags = tags,
+      name = name,
+      external_id = external_id,
+      external_url = external_url,
+      contacts = contacts,
+      feedbacks = feedbacks,
+      page = page,
+      size = size,
+      ... = ...,
+      .unnest_element = "companies"
+    )
+  }
+  page_all_requests(get_page, page = page, size = size, .limit = .limit)
 }
 
 
@@ -263,7 +262,6 @@ pp_get_companies_vector <- function() {
 }
 
 # contacts ----------------------------------------------------------------
-
 
 #' Get a tibble of contacts.
 #'
@@ -299,37 +297,36 @@ pp_get_companies_vector <- function() {
 #'
 #' @export
 pp_get_contacts <- function(
-    name = NULL,
-    email = NULL,
-    company = NULL,
-    persona = NULL,
-    job_role = NULL,
-    tags = NULL,
-    external_id = NULL,
-    external_url = NULL,
-    feedbacks = NULL,
-    page = NULL,
-    size = NULL,
-    ...
+  name = NULL,
+  email = NULL,
+  company = NULL,
+  persona = NULL,
+  job_role = NULL,
+  tags = NULL,
+  external_id = NULL,
+  external_url = NULL,
+  feedbacks = NULL,
+  page = NULL,
+  size = NULL,
+  ...
 ) {
- .pp("/contacts",
-     company = company,
-     persona = persona,
-     job_role = job_role,
-     tags = tags,
-     name = name,
-     external_id = external_id,
-     external_url = external_url,
-     email = email,
-     feedbacks = feedbacks,
-     page = page,
-     size = size,
-     ... = ...,
-     .unnest_element = "contacts"
+  .pp(
+    "/contacts",
+    company = company,
+    persona = persona,
+    job_role = job_role,
+    tags = tags,
+    name = name,
+    external_id = external_id,
+    external_url = external_url,
+    email = email,
+    feedbacks = feedbacks,
+    page = page,
+    size = size,
+    ... = ...,
+    .unnest_element = "contacts"
   )
 }
-
-
 
 
 #' Get named vector of contacts
@@ -361,22 +358,22 @@ pp_get_contacts_vector <- function() {
 #'
 #' @export
 pp_get_contact <- function(
-    id = NULL,
-    feedbacks = NULL,
-    ...
+  id = NULL,
+  feedbacks = NULL,
+  ...
 ) {
- .pp("get /contacts/{id}",
-     id = id,
-     feedbacks = feedbacks,
-     ... = ...,
-     .unnest_element = NULL
+  .pp(
+    "get /contacts/{id}",
+    id = id,
+    feedbacks = feedbacks,
+    ... = ...,
+    .unnest_element = NULL
   ) %>%
     c()
 }
 
 
 # personas ----------------------------------------------------------------
-
 
 #' Get tibble of personas.
 #'
@@ -387,12 +384,9 @@ pp_get_contact <- function(
 #' @family Persona
 #' @export
 pp_get_personas <- function(
-    ...
+  ...
 ) {
- .pp("get /personas",
-     ... = ...,
-     .unnest = TRUE
-  )
+  .pp("get /personas", ... = ..., .unnest = TRUE)
 }
 
 #' Get named vector of personas.
@@ -420,12 +414,9 @@ pp_get_personas_vector <- function() {
 #' @export
 #' @return Tibble with user information
 pp_get_users <- function(
-    ...
+  ...
 ) {
- .pp("get /users",
-     ... = ...,
-     .unnest = TRUE
-  )
+  .pp("get /users", ... = ..., .unnest = TRUE)
 }
 
 
@@ -443,16 +434,14 @@ pp_get_users <- function(
 #' @family User
 #' @export
 pp_get_user <- function(
-    id = NULL,
-    ...
+  id = NULL,
+  ...
 ) {
- .pp("/users/{id}",
-     id = id,
-     ... = ...
-     # .unnest_element = NULL
+  .pp(
+    "/users/{id}",
+    id = id,
+    ... = ...
+    # .unnest_element = NULL
   ) %>%
     c()
 }
-
-
-

@@ -13,13 +13,11 @@ test_that("unnest works", {
     fb %>%
     dplyr::select(id, ideas) %>%
     unnest_tibble(ideas)
-  expect_tbl(ufb, ncol = 4)
+  expect_tbl(ufb, ncol = 5)
 
   ufb <-
     fb %>%
     dplyr::select(id, products) %>%
     unnest_tibble(products)
   expect_tbl(ufb, ncol = 5)
-
-
 })

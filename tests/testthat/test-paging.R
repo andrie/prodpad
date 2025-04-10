@@ -1,35 +1,31 @@
-
 if (require("R6", quietly = TRUE)) {
-Pager <- R6::R6Class(
-  "Pager",
-  public = list(
-    n = 0,
-    orig = 0,
-    pointer = 1,
-    initialize = function(n) {
-      self$orig <- n
-      self$n <- n
-    },
-    call = function(n = 0) {
-      self$n <- self$n - n
-      self$n <- max(0, self$n)
-      self$n
-    },
-    call_df = function(n = 0) {
-      size = min(n, self$n)
-      self$n <- self$n - size
-      series <- seq(from = self$pointer, length.out = size)
-      self$pointer <- self$pointer + size
-      data.frame(
-        i = series
-      )
-    }
+  Pager <- R6::R6Class(
+    "Pager",
+    public = list(
+      n = 0,
+      orig = 0,
+      pointer = 1,
+      initialize = function(n) {
+        self$orig <- n
+        self$n <- n
+      },
+      call = function(n = 0) {
+        self$n <- self$n - n
+        self$n <- max(0, self$n)
+        self$n
+      },
+      call_df = function(n = 0) {
+        size = min(n, self$n)
+        self$n <- self$n - size
+        series <- seq(from = self$pointer, length.out = size)
+        self$pointer <- self$pointer + size
+        data.frame(
+          i = series
+        )
+      }
+    )
   )
-)
 }
-
-
-
 
 
 test_that("pager class works", {
@@ -71,4 +67,9 @@ test_that("page_all_requests works", {
 test_that("paging works on ideas", {
   skip_if_not_installed("R6")
   expect_tbl(pp_get_ideas(size = 11, .limit = 20), nrow = 20)
+})
+
+test_that("paging works on companies", {
+  skip_if_not_installed("R6")
+  expect_tbl(pp_get_companies(size = 10, .limit = 20), nrow = 20)
 })
