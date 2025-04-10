@@ -19,7 +19,7 @@
 #' @examplesIf FALSE
 #' describe_api()
 describe_api <- function(max.level = 4) {
-  prodpad_api_v1 %>% str(max.level = max.level)
+  prodpad_api_v1 |> str(max.level = max.level)
 }
 
 
@@ -32,9 +32,9 @@ describe_api <- function(max.level = 4) {
 #' prodpad:::describe_api_paths()
 describe_api_paths <- function(search = "") {
   path <- NULL # for R CMD check
-  prodpad_api_v1$paths %>%
-    purrr::map_dfr(~tibble::tibble(verb = names(.)), .id = "path") %>%
-    dplyr::filter(grepl(search, path)) %>%
+  prodpad_api_v1$paths |>
+    purrr::map_dfr(~ tibble::tibble(verb = names(.)), .id = "path") |>
+    dplyr::filter(grepl(search, path)) |>
     identity()
 }
 
@@ -63,14 +63,14 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
 
   # title
 
-  title <- this$summary %>% gsub("\\.*\n*$", "", .)
+  title <- this$summary |> gsub("\\.*\n*$", "", .)
   z1 <- collapse(glue::glue("#' {title}.\n#'\n"), sep = "\n")
 
   # description
 
-  desc <- this$description %>%
-    strsplit("\n") %>%
-    .[[1]] %>%
+  desc <- this$description |>
+    strsplit("\n") |>
+    .[[1]] |>
     gsub("\\.*\n$", "", .)
   z2 <- collapse(c(
     glue::glue("#' {desc}\n#'\n"),
@@ -83,7 +83,7 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
   params <- if (is.null(this[["parameters"]])) {
     NULL
   } else {
-    this[["parameters"]] %>% as_tibble() %>% select(name, description)
+    this[["parameters"]] |> as_tibble() |> select(name, description)
   }
 
   z3 <- if (is.null(params)) {
@@ -96,7 +96,6 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
     )
   }
 
-
   dots <- collapse(c(
     "#'",
     "#' @param ... Other arguments passed to [.pp()]()]"
@@ -105,9 +104,9 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
   # @note
 
   z4 <- collapse(c(
-      "#'",
-      glue("#' @note {toupper(verb)} {path}")
-    ))
+    "#'",
+    glue("#' @note {toupper(verb)} {path}")
+  ))
 
   # @export
 
@@ -133,12 +132,24 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
       "}"
     )
   )
-  z <- collapse(z1, z2, z3, "\n", dots, "\n", z4, "\n", z5, "\n", func, sep = "\n")
+  z <- collapse(
+    z1,
+    z2,
+    z3,
+    "\n",
+    dots,
+    "\n",
+    z4,
+    "\n",
+    z5,
+    "\n",
+    func,
+    sep = "\n"
+  )
   clipr::write_clip(z)
   cat(z)
   message("Copied to clipboard")
   invisible(z)
 }
 
-# api %>% describe() %>% as_tibble() %>% select(name, description)
-
+# api |> describe() |> as_tibble() |> select(name, description)

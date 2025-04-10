@@ -1,5 +1,3 @@
-
-
 #' Get tibble of feedbacks.
 #'
 #' Returns a tibble of feedback which can be a straight list or grouped by
@@ -65,48 +63,49 @@
 #'
 #' @export
 pp_get_feedbacks <- function(
-    state = c("all", "active", "archived", "unsorted"),
-    company = NULL,
-    company_country = NULL,
-    company_size = NULL,
-    company_value = NULL,
-    customer = NULL,
-    product = NULL,
-    persona = NULL,
-    job_role = NULL,
-    tags = NULL,
-    has_ideas = NULL,
-    external_id = NULL,
-    external_url = NULL,
-    group_by = FALSE,
-    page = 1,
-    size = 100,
-    .limit = NULL,
-    ...
+  state = c("all", "active", "archived", "unsorted"),
+  company = NULL,
+  company_country = NULL,
+  company_size = NULL,
+  company_value = NULL,
+  customer = NULL,
+  product = NULL,
+  persona = NULL,
+  job_role = NULL,
+  tags = NULL,
+  has_ideas = NULL,
+  external_id = NULL,
+  external_url = NULL,
+  group_by = FALSE,
+  page = 1,
+  size = 100,
+  .limit = NULL,
+  ...
 ) {
   "state" <- match.arg(state)
 
   get_one <- function(page, size) {
-    .pp("get /feedbacks",
-        group_by = group_by,
-        state = state,
-        page = page,
-        size = size,
-        company = company,
-        company_country = company_country,
-        company_size = company_size,
-        company_value = company_value,
-        customer = customer,
-        product = product,
-        persona = persona,
-        job_role = job_role,
-        tags = tags,
-        has_ideas = has_ideas,
-        external_id = external_id,
-        external_url = external_url,
-        ... = ...,
-        .unnest = TRUE,
-        .unnest_dont_unlist = c("tags", "ideas", "products", "personas")
+    .pp(
+      "get /feedbacks",
+      group_by = group_by,
+      state = state,
+      page = page,
+      size = size,
+      company = company,
+      company_country = company_country,
+      company_size = company_size,
+      company_value = company_value,
+      customer = customer,
+      product = product,
+      persona = persona,
+      job_role = job_role,
+      tags = tags,
+      has_ideas = has_ideas,
+      external_id = external_id,
+      external_url = external_url,
+      ... = ...,
+      .unnest = TRUE,
+      .unnest_dont_unlist = c("tags", "ideas", "products", "personas")
     )
   }
 
@@ -128,23 +127,15 @@ pp_get_feedbacks <- function(
 #'
 #' @export
 pp_get_feedback <- function(
-    id = NULL,
-    ...
+  id = NULL,
+  ...
 ) {
- .pp("get /feedbacks/{id}",
-     id = id,
-     ... = ...,
-     .unnest_element = NULL
-  ) %>%
+  .pp("get /feedbacks/{id}", id = id, ... = ..., .unnest_element = NULL) |>
     c()
 }
 
 
-
-
 # post --------------------------------------------------------------------
-
-
 
 #' Create a new feedback.
 #'
@@ -188,18 +179,19 @@ pp_get_feedback <- function(
 #'
 #' @export
 pp_post_feedback <- function(
-    contact_id,
-    contact_name = NULL,
-    product_id,
-    product_name = NA,
-    feedback,
-    # company_id = NULL,
-    ...
+  contact_id,
+  contact_name = NULL,
+  product_id,
+  product_name = NA,
+  feedback,
+  # company_id = NULL,
+  ...
 ) {
   feedback <- as.character(feedback)
   products = data.frame(id = product_id, name = product_name)
 
- .pp("POST /feedbacks",
+  .pp(
+    "POST /feedbacks",
     contact_id = contact_id,
     name = contact_name,
     # company_id = company_id,
@@ -207,9 +199,9 @@ pp_post_feedback <- function(
     # email = email,
     # about = about,
     products = products,
-     ... = ...,
+    ... = ...,
     .send_headers = c(`Content-Type` = "application/json")
-  ) %>%
+  ) |>
     c()
 }
 
@@ -229,14 +221,14 @@ pp_post_feedback <- function(
 #'
 #' @export
 pp_archive_feedback <- function(
-    id = NULL,
-    ...
+  id = NULL,
+  ...
 ) {
- .pp("PUT /feedbacks/{id}",
-     id = id,
-     state = "archived",
-     ... = ...,
-     .send_headers = c(`Content-Type` = "application/json")
+  .pp(
+    "PUT /feedbacks/{id}",
+    id = id,
+    state = "archived",
+    ... = ...,
+    .send_headers = c(`Content-Type` = "application/json")
   )
 }
-

@@ -10,8 +10,8 @@
 pp_get_products <- function() {
   res <- .pp("/products", group = FALSE)
   count <- attr(res, "count")
-  res$productlines %>%
-    map_dfr(~ .$products %>% pp_unnest()) %>%
+  res$productlines |>
+    map_dfr(~ .$products |> pp_unnest()) |>
     set_attr("count", count)
 }
 
@@ -23,7 +23,7 @@ pp_get_products <- function() {
 #' @family Products
 #' @export
 pp_get_products_vector <- function() {
-  pp_get_products() %>%
+  pp_get_products() |>
     get_id_vector()
 }
 
@@ -139,7 +139,7 @@ pp_get_idea <- function(
     by_project_id = isTRUE(by_project_id),
     ... = ...,
     .unnest = FALSE
-  ) %>%
+  ) |>
     c() # drops attributes
 }
 
@@ -257,7 +257,7 @@ pp_get_companies <- function(
 #'
 #' @return Named vector
 pp_get_companies_vector <- function() {
-  pp_get_companies() %>%
+  pp_get_companies() |>
     get_id_vector()
 }
 
@@ -336,7 +336,7 @@ pp_get_contacts <- function(
 #'
 #' @return Named vector
 pp_get_contacts_vector <- function() {
-  pp_get_contacts() %>%
+  pp_get_contacts() |>
     get_id_vector()
 }
 
@@ -368,7 +368,7 @@ pp_get_contact <- function(
     feedbacks = feedbacks,
     ... = ...,
     .unnest_element = NULL
-  ) %>%
+  ) |>
     c()
 }
 
@@ -396,7 +396,7 @@ pp_get_personas <- function(
 #' @family Persona
 #' @return Named vector
 pp_get_personas_vector <- function() {
-  pp_get_personas() %>%
+  pp_get_personas() |>
     get_id_vector()
 }
 
@@ -442,6 +442,6 @@ pp_get_user <- function(
     id = id,
     ... = ...
     # .unnest_element = NULL
-  ) %>%
+  ) |>
     c()
 }

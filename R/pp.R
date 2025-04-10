@@ -1,7 +1,6 @@
 #' @importFrom tidyr unnest_wider
 #' @importFrom tidyselect all_of
-pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
-
+pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL, ...) {
   # unnest initial data frame
   df <- tibble::tibble(x)
   list_cols <- setdiff(names(x), .unnest_dont_unlist)
@@ -9,7 +8,7 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 
   # browser()
   # unnest list columns
-  list_cols <- z %>% purrr::keep(is.list) %>% names()
+  list_cols <- z |> purrr::keep(is.list) |> names()
   list_cols <- setdiff(list_cols, .unnest_dont_unlist)
   if (length(list_cols) > 0) {
     unnest_wider(z, all_of(list_cols), names_sep = names_sep)
@@ -114,15 +113,24 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
 #'
 #'
 #' @export
-.pp <- function(endpoint, ..., per_page = NULL, .destfile = NULL,
-               .overwrite = FALSE, .api_url = NULL, .method = "GET",
-               .limit = NULL, .accept = "application/json",
-               .send_headers = NULL, .progress = TRUE, .params = list(),
-               .api_version = 1,
-               .unnest = !is.null(.unnest_element),
-               .unnest_element = NULL,
-               .unnest_dont_unlist = NULL) {
-
+.pp <- function(
+  endpoint,
+  ...,
+  per_page = NULL,
+  .destfile = NULL,
+  .overwrite = FALSE,
+  .api_url = NULL,
+  .method = "GET",
+  .limit = NULL,
+  .accept = "application/json",
+  .send_headers = NULL,
+  .progress = TRUE,
+  .params = list(),
+  .api_version = 1,
+  .unnest = !is.null(.unnest_element),
+  .unnest_element = NULL,
+  .unnest_dont_unlist = NULL
+) {
   # browser()
 
   if (is.null(.api_url)) {
@@ -139,11 +147,8 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
       "You must set the PRODPAD_API_KEY env var for authentication. ",
       "Use browse_api_key() to find your API key.",
       call. = FALSE
-      )
+    )
   }
-
-
-
 
   params <- c(list(...), .params)
   params <- drop_named_nulls(params)
@@ -159,14 +164,16 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
   }
 
   req <- pp_build_request(
-    endpoint = endpoint, params = params,
-    token = NULL, destfile = .destfile,
+    endpoint = endpoint,
+    params = params,
+    token = NULL,
+    destfile = .destfile,
     overwrite = .overwrite,
     accept = .accept,
     send_headers = .send_headers,
-    api_url = .api_url, method = .method
+    api_url = .api_url,
+    method = .method
   )
-
 
   if (req$method == "GET") check_named_nas(params)
 
@@ -208,8 +215,12 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
   # }
 
   # We only subset for a non-named response.
-  if (!is.null(.limit) && len > .limit &&
-      !"total_count" %in% names(res) && length(res) == len) {
+  if (
+    !is.null(.limit) &&
+      len > .limit &&
+      !"total_count" %in% names(res) &&
+      length(res) == len
+  ) {
     res_attr <- attributes(res)
     res <- res[seq_len(.limit)]
     attributes(res) <- res_attr
@@ -224,26 +235,32 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL,  ...) {
   if (isTRUE(.unnest)) {
     z <-
       if (!is.null(.unnest_element)) {
-        res[[.unnest_element]] %>%
-          pp_unnest(.unnest_dont_unlist = .unnest_dont_unlist )
+        res[[.unnest_element]] |>
+          pp_unnest(.unnest_dont_unlist = .unnest_dont_unlist)
       } else {
-        res %>%
+        res |>
           pp_unnest(.unnest_dont_unlist = .unnest_dont_unlist)
       }
     res <-
-      z %>%
-      mutate(dplyr::across(dplyr::starts_with("created_at"), parse_prodpad_date)) %>%
-      mutate(dplyr::across(dplyr::starts_with("updated_at"), parse_prodpad_date))
+      z |>
+      mutate(dplyr::across(
+        dplyr::starts_with("created_at"),
+        parse_prodpad_date
+      )) |>
+      mutate(dplyr::across(
+        dplyr::starts_with("updated_at"),
+        parse_prodpad_date
+      ))
   }
 
   attr(res, "count") <- count
   res
-
 }
 
 pp_response_length <- function(res) {
-  if (!is.null(names(res)) && length(res) > 1 &&
-      names(res)[1] == "total_count") {
+  if (
+    !is.null(names(res)) && length(res) > 1 && names(res)[1] == "total_count"
+  ) {
     # Ignore total_count, incomplete_results, repository_selection
     # and take the first list element to get the length
     lst <- vapply(res, is.list, logical(1))
@@ -260,8 +277,11 @@ pp_response_length <- function(res) {
 
 pp_make_request <- function(x) {
   method_fun <- list(
-    "GET" = httr::GET, "POST" = httr::POST, "PATCH" = httr::PATCH,
-    "PUT" = httr::PUT, "DELETE" = httr::DELETE
+    "GET" = httr::GET,
+    "POST" = httr::POST,
+    "PATCH" = httr::PATCH,
+    "PUT" = httr::PUT,
+    "DELETE" = httr::DELETE
   )[[x$method]]
   if (is.null(method_fun)) {
     cli::cli_abort("Unknown HTTP verb: {.val {x$method}}")
@@ -270,8 +290,11 @@ pp_make_request <- function(x) {
   raw <- do.call(
     method_fun,
     compact(list(
-      url = x$url, query = x$query, body = x$body,
-      add_headers(x$headers), x$dest
+      url = x$url,
+      query = x$query,
+      body = x$body,
+      add_headers(x$headers),
+      x$dest
     ))
   )
   raw

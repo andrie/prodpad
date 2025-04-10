@@ -24,7 +24,7 @@ test_that("get", {
   )
 
   expect_true(
-    pp_get_products() %>% attr("count") > 0
+    pp_get_products() |> attr("count") > 0
   )
 
   expect_tbl(

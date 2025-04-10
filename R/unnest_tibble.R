@@ -1,6 +1,6 @@
 unnull_and_tibble <- function(x) {
-  null_to_na <- function(x) if(length(x)) x else NA
-  map(x, ~map(., null_to_na)) %>% map_dfr(as_tibble)
+  null_to_na <- function(x) if (length(x)) x else NA
+  map(x, ~ map(., null_to_na)) |> map_dfr(as_tibble)
 }
 
 
@@ -20,11 +20,9 @@ unnull_and_tibble <- function(x) {
 #' @importFrom tidyr unnest_longer unnest_wider
 #' @importFrom rlang `:=`
 unnest_tibble <- function(.data, .col) {
-  .data %>%
-    mutate({{ .col }} := {{ .col }} %>%  map(unnull_and_tibble)) %>%
-    unnest_longer({{ .col }}) %>%
-    unnest_wider({{ .col }}, names_sep = "_") %>%
+  .data |>
+    mutate({{ .col }} := {{ .col }} |> map(unnull_and_tibble)) |>
+    unnest_longer({{ .col }}) |>
+    unnest_wider({{ .col }}, names_sep = "_") |>
     identity()
 }
-
-

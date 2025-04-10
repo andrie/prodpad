@@ -4,20 +4,20 @@ test_that("unnest works", {
   expect_equal(nrow(fb), 200)
 
   ufb <-
-    fb %>%
-    dplyr::select(id, tags) %>%
+    fb |>
+    dplyr::select(id, tags) |>
     unnest_tibble(tags)
   expect_tbl(ufb, ncol = 5)
 
   ufb <-
-    fb %>%
-    dplyr::select(id, ideas) %>%
+    fb |>
+    dplyr::select(id, ideas) |>
     unnest_tibble(ideas)
   expect_tbl(ufb, ncol = 5)
 
   ufb <-
-    fb %>%
-    dplyr::select(id, products) %>%
+    fb |>
+    dplyr::select(id, products) |>
     unnest_tibble(products)
   expect_tbl(ufb, ncol = 5)
 })
