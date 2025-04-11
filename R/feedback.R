@@ -57,7 +57,7 @@
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note GET /feedbacks
+#' @note `GET /feedbacks`
 #'
 #' @return tibble
 #'
@@ -123,7 +123,7 @@ pp_get_feedbacks <- function(
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note GET /feedbacks/{id}
+#' @note `GET /feedbacks/{id}`
 #'
 #' @export
 pp_get_feedback <- function(
@@ -175,7 +175,7 @@ pp_get_feedback <- function(
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note POST /feedbacks
+#' @note `POST /feedbacks`
 #'
 #' @export
 pp_post_feedback <- function(
@@ -217,7 +217,7 @@ pp_post_feedback <- function(
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note PUT /feedbacks/{id}
+#' @note `PUT /feedbacks/{id}`
 #'
 #' @export
 pp_archive_feedback <- function(

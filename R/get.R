@@ -123,7 +123,7 @@ pp_get_ideas <- function(
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note GET /ideas/{id}
+#' @note `GET /ideas/{id}`
 #'
 #' @export
 pp_get_idea <- function(
@@ -151,9 +151,9 @@ pp_get_idea <- function(
 #'
 #' @param id Numeric ID of the idea.
 #'
-#' @param ... Other arguments passed to [.pp()]()]
+#' @inherit pp_get_ideas
 #'
-#' @note GET /ideas/{id}/feedback
+#' @note `GET /ideas/{id}/feedback`
 #' @family Ideas
 #'
 #' @export
@@ -204,9 +204,9 @@ pp_get_idea_feedback <- function(
 #'
 #' @param page The page of results to return (size is always 100).
 #'
-#' @param ... Other arguments passed to [.pp()]()]
+#' @inherit pp_get_ideas
 #'
-#' @note GET /companies
+#' @note `GET /companies`
 #' @family Companies
 #'
 #' @export
@@ -293,7 +293,7 @@ pp_get_companies_vector <- function() {
 #' @param ... Other arguments passed to [.pp()]()]
 #'
 #' @family Contacts
-#' @note GET /contacts
+#' @note `GET /contacts`
 #'
 #' @export
 pp_get_contacts <- function(
@@ -354,7 +354,7 @@ pp_get_contacts_vector <- function() {
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note GET /contacts/{id}
+#' @note `GET /contacts/{id}`
 #'
 #' @export
 pp_get_contact <- function(
@@ -379,7 +379,7 @@ pp_get_contact <- function(
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note GET /personas
+#' @note `GET /personas`
 #'
 #' @family Persona
 #' @export
@@ -408,7 +408,7 @@ pp_get_personas_vector <- function() {
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note GET /users
+#' @note `GET /users`
 #'
 #' @family User
 #' @export
@@ -429,7 +429,7 @@ pp_get_users <- function(
 #'
 #' @param ... Other arguments passed to [.pp()]()]
 #'
-#' @note GET /user/{id}
+#' @note `GET /user/{id}`
 #'
 #' @family User
 #' @export

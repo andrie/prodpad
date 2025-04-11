@@ -70,7 +70,7 @@ describe_api_path <- function(path = "/feedbacks", verb = "get") {
 
   desc <- this$description |>
     strsplit("\n") |>
-    .[[1]] |>
+    magrittr::extract2(1) |>
     gsub("\\.*\n$", "", .)
   z2 <- collapse(c(
     glue::glue("#' {desc}\n#'\n"),
