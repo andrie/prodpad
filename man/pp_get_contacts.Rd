@@ -14,8 +14,9 @@ pp_get_contacts(
   external_id = NULL,
   external_url = NULL,
   feedbacks = NULL,
-  page = NULL,
-  size = NULL,
+  page = 1,
+  size = 100,
+  .limit = size,
   ...
 )
 
@@ -29,8 +30,9 @@ pp_get_contacts(
   external_id = NULL,
   external_url = NULL,
   feedbacks = NULL,
-  page = NULL,
-  size = NULL,
+  page = 1,
+  size = 100,
+  .limit = size,
   ...
 )
 }
@@ -53,9 +55,11 @@ pp_get_contacts(
 
 \item{feedbacks}{Wheter to include the feedback for each contact in the results. Default is false.}
 
-\item{page}{Page number of results to return.}
+\item{page}{Page of results to return}
 
-\item{size}{Number of results per page.}
+\item{size}{The number of results per page}
+
+\item{.limit}{The maximum number of elements to return.}
 
 \item{...}{Other arguments passed to \url{.pp()}]}
 }

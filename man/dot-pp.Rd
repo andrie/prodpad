@@ -103,8 +103,10 @@ Answer from the API as a \code{pp_response} object, which is also a
 generate a raw response will return a raw vector.
 }
 \description{
-This is an extremely minimal client. You need to know the API
-to be able to use this client. All this function does is:
+This is an extremely minimal client to make calls to the ProdPad API as documented at
+\url{https://app.swaggerhub.com/apis/ProdPad/prodpad/1.1.4#/}
+
+You need to know the API to be able to use this client. All this function does is:
 \itemize{
 \item Try to substitute each listed parameter into \code{endpoint}, using the
 \code{{parameter}} notation.

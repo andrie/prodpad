@@ -21,8 +21,10 @@ pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL, ...) {
 #'
 #' @description
 #'
-#' This is an extremely minimal client. You need to know the API
-#' to be able to use this client. All this function does is:
+#' This is an extremely minimal client to make calls to the ProdPad API as documented at
+#' <https://app.swaggerhub.com/apis/ProdPad/prodpad/1.1.4#/>
+#'
+#' You need to know the API to be able to use this client. All this function does is:
 #'
 #' * Try to substitute each listed parameter into `endpoint`, using the
 #'   `{parameter}` notation.
