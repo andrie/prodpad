@@ -15,7 +15,7 @@ pp_get_idea_feedback(id, ...)
 Returns a tibble of all the feedback that is associated to the idea. This allows you to display the feedback in other apps for a particular idea or sync feedback between ProdPad and other applications.
 }
 \note{
-GET /ideas/{id}/feedback
+\code{GET /ideas/{id}/feedback}
 }
 \seealso{
 Other Ideas: 

@@ -1,13 +1,13 @@
 Package: prodpad
 Title: R Client for the ProdPad API
-Version: 0.0.2.9000
+Version: 0.0.3.9000
 Authors@R: 
     c(person("Andrie", "de Vries", role = c("aut", "cre"), email = "andrie@rstudio.com"),
-    person(given = "RStudio", role = c("cph", "fnd")))
+    person(given = "Posit", role = c("cph", "fnd")))
 Description: Provide a low level wrapper `pp()` as well as higher level wrappers around the ProdPad API.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Imports: 
     httr,
     glue,
@@ -29,7 +29,7 @@ Suggests:
 Config/testthat/edition: 3
 Config/Needs/website: tidyverse/tidytemplate
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Roxygen: list(markdown = TRUE)
 URL: https://andrie.github.io/prodpad/, https://github.com/andrie/prodpad
 BugReports: https://github.com/andrie/prodpad/issues

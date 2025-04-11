@@ -16,7 +16,7 @@ Tibble with user information
 This endpoint returns a list of users with roles in the account.
 }
 \note{
-GET /users
+\code{GET /users}
 }
 \seealso{
 Other User: 

@@ -87,5 +87,5 @@ query parameter for active, archived, unsorted or all.Note that by default
 only active feedback is returned.
 }
 \note{
-GET /feedbacks
+\code{GET /feedbacks}
 }

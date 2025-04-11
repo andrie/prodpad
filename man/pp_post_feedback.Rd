@@ -42,5 +42,5 @@ already exists and if it does the feedback will be automatically added to the
 existing contact.
 }
 \note{
-POST /feedbacks
+\code{POST /feedbacks}
 }

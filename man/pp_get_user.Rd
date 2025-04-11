@@ -15,7 +15,7 @@ pp_get_user(id = NULL, ...)
 Return the details on the user and their role.
 }
 \note{
-GET /user/{id}
+\code{GET /user/{id}}
 }
 \seealso{
 Other User: 

@@ -22,5 +22,5 @@ Use the numeric ID to return an idea. You can get a simple version of the idea o
 If you have the project_id (the numerical number from the ProdPad UI in the idea canvas url) you can use that to fetch the idea by using the query parameter by_project_id, otherwise you need to use the global numerical ID.
 }
 \note{
-GET /ideas/{id}
+\code{GET /ideas/{id}}
 }

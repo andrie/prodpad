@@ -13,7 +13,7 @@ pp_get_personas(...)
 Get tibble of personas.
 }
 \note{
-GET /personas
+\code{GET /personas}
 }
 \seealso{
 Other Persona: 

@@ -15,7 +15,9 @@ pp_get_companies(
   external_url = NULL,
   contacts = TRUE,
   feedbacks = NULL,
-  page = NULL,
+  page = 1,
+  size = 100,
+  .limit = size,
   ...
 )
 }
@@ -42,6 +44,10 @@ pp_get_companies(
 
 \item{page}{The page of results to return (size is always 100).}
 
+\item{size}{The number of results per page}
+
+\item{.limit}{The maximum number of elements to return.}
+
 \item{...}{Other arguments passed to \url{.pp()}]}
 }
 \description{
@@ -53,7 +59,7 @@ While very useful for business to busines,s companies can be used to create a an
 Using parameters allows you to also select whether to return feedback associated to the company via the contacts connected to the company. This is only available to accounts with an Advanced+ subscription.
 }
 \note{
-GET /companies
+\code{GET /companies}
 }
 \seealso{
 Other Companies: 

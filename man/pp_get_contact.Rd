@@ -20,5 +20,5 @@ Returns the details of a contact. This will include a contacts PII (such as name
 You can choose to include the feedback provided by the contact or not.
 }
 \note{
-GET /contacts/{id}
+\code{GET /contacts/{id}}
 }

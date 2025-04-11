@@ -63,7 +63,7 @@ pp_get_contacts(
 Get a tibble of all the contacts in the account. This can be used to sync contacts between ProdPad and CRMs.
 }
 \note{
-GET /contacts
+\code{GET /contacts}
 }
 \seealso{
 Other Contacts: 

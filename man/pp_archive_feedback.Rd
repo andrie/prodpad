@@ -18,5 +18,5 @@ link to a record in the CRM, other 3rd party application or video of the
 customer interview).
 }
 \note{
-PUT /feedbacks/{id}
+\code{PUT /feedbacks/{id}}
 }

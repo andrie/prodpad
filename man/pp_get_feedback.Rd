@@ -16,5 +16,5 @@ Return an individual piece of feedback. The feedback is returned with the
 details of the contact that provided the piece of feedback.
 }
 \note{
-GET /feedbacks/{id}
+\code{GET /feedbacks/{id}}
 }
