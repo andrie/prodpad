@@ -286,11 +286,7 @@ pp_get_companies_vector <- function() {
 #'
 #' @param feedbacks Wheter to include the feedback for each contact in the results. Default is false.
 #'
-#' @param page Page number of results to return.
-#'
-#' @param size Number of results per page.
-#'
-#' @param ... Other arguments passed to [.pp()]()]
+#' @inherit pp_get_ideas
 #'
 #' @family Contacts
 #' @note `GET /contacts`
@@ -306,26 +302,31 @@ pp_get_contacts <- function(
   external_id = NULL,
   external_url = NULL,
   feedbacks = NULL,
-  page = NULL,
-  size = NULL,
+  page = 1,
+  size = 100,
+  .limit = size,
   ...
 ) {
-  .pp(
-    "/contacts",
-    company = company,
-    persona = persona,
-    job_role = job_role,
-    tags = tags,
-    name = name,
-    external_id = external_id,
-    external_url = external_url,
-    email = email,
-    feedbacks = feedbacks,
-    page = page,
-    size = size,
-    ... = ...,
-    .unnest_element = "contacts"
-  )
+  if (size > .limit) size <- .limit
+  get_page <- function(page, size) {
+    .pp(
+      "/contacts",
+      company = company,
+      persona = persona,
+      job_role = job_role,
+      tags = tags,
+      name = name,
+      external_id = external_id,
+      external_url = external_url,
+      email = email,
+      feedbacks = feedbacks,
+      page = page,
+      size = size,
+      ... = ...,
+      .unnest_element = "contacts"
+    )
+  }
+  page_all_requests(get_page, page = page, size = size, .limit = .limit)
 }
 
 

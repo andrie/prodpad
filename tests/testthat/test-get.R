@@ -45,6 +45,12 @@ test_that("get", {
   )
 
   expect_tbl(
+    pp_get_contacts(size = 3, .limit = 6),
+    nrow = 6,
+    ncol = 14
+  )
+
+  expect_tbl(
     pp_get_personas(),
     ncol = 8
   )
