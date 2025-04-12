@@ -33,7 +33,8 @@ describe_api <- function(max.level = 4) {
 describe_api_paths <- function(search = "") {
   path <- NULL # for R CMD check
   prodpad_api_v1$paths |>
-    purrr::map_dfr(~ tibble::tibble(verb = names(.)), .id = "path") |>
+    map(~ tibble::tibble(verb = names(.)), .id = "path") |>
+    list_rbind() |>
     dplyr::filter(grepl(search, path)) |>
     identity()
 }

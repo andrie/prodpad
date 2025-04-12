@@ -15,8 +15,11 @@ unnest_tibble(.data, .col)
 A modified tibble
 }
 \description{
-This is frequently necessary to unnest \code{tags}, \code{products}, \code{feedbacks}, \code{personas} and other columns embedded in prodpad data.
+This is frequently necessary to unnest \code{tags}, \code{products}, \code{feedbacks}, \code{personas}
+and other columns embedded in prodpad data.
 }
 \details{
-This function converts the list column into a list of tibbles, then calls \verb{[tidyr::unnest_longer()]} followed by \verb{[tidyr::unnest_wider()]}.  The effect is to hoist the entire list into the top level data.
+This function converts the list column into a list of tibbles, then calls
+\verb{[tidyr::unnest_longer()]} followed by \verb{[tidyr::unnest_wider()]}.
+The effect is to hoist the entire list into the top level data.
 }
