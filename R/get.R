@@ -5,13 +5,14 @@
 #' @family Products
 #' @export
 #' @importFrom dplyr bind_cols select rename select_if
-#' @importFrom purrr map_dfr
+#' @importFrom purrr map list_rbind
 #' @importFrom magrittr set_attr
 pp_get_products <- function() {
   res <- .pp("/products", group = FALSE)
   count <- attr(res, "count")
   res$productlines |>
-    map_dfr(~ .$products |> pp_unnest()) |>
+    map(~ .$products |> pp_unnest()) |>
+    list_rbind() |>
     set_attr("count", count)
 }
 
@@ -227,6 +228,8 @@ pp_get_companies <- function(
   ...
 ) {
   if (size > .limit) size <- .limit
+  if (isTRUE(contacts)) contacts <- "true"
+  if (isTRUE(contacts)) contacts <- "true"
   get_page <- function(page, size) {
     .pp(
       "/companies",
@@ -247,6 +250,16 @@ pp_get_companies <- function(
     )
   }
   page_all_requests(get_page, page = page, size = size, .limit = .limit)
+}
+
+
+pp_get_company <- function(id) {
+  id <- URLencode(id)
+  .pp(
+    "GET /companies/{id}",
+    id = id
+  ) |>
+    c()
 }
 
 
