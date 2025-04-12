@@ -1,22 +1,3 @@
-#' @importFrom tidyr unnest_wider
-#' @importFrom tidyselect all_of
-pp_unnest <- function(x, names_sep = "_", .unnest_dont_unlist = NULL, ...) {
-  # unnest initial data frame
-  df <- tibble::tibble(x)
-  list_cols <- setdiff(names(x), .unnest_dont_unlist)
-  z <- unnest_wider(df, x, ...)
-
-  # browser()
-  # unnest list columns
-  list_cols <- z |> purrr::keep(is.list) |> names()
-  list_cols <- setdiff(list_cols, .unnest_dont_unlist)
-  if (length(list_cols) > 0) {
-    unnest_wider(z, all_of(list_cols), names_sep = names_sep)
-  } else {
-    z
-  }
-}
-
 #' Query the Prodpad API
 #'
 #' @description
@@ -278,13 +259,14 @@ pp_response_length <- function(res) {
 }
 
 pp_make_request <- function(x) {
-  method_fun <- list(
+  methods <- list(
     "GET" = httr::GET,
     "POST" = httr::POST,
     "PATCH" = httr::PATCH,
     "PUT" = httr::PUT,
     "DELETE" = httr::DELETE
-  )[[x$method]]
+  )
+  method_fun <- methods[[x$method]]
   if (is.null(method_fun)) {
     cli::cli_abort("Unknown HTTP verb: {.val {x$method}}")
   }
