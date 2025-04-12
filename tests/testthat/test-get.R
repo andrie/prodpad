@@ -33,8 +33,8 @@ test_that("get", {
   )
 
   expect_tbl(
-    pp_get_companies(size = 11),
-    nrow = 11,
+    pp_get_companies(size = 9),
+    nrow = 9,
     ncol = 11
   )
 

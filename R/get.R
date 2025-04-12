@@ -220,8 +220,8 @@ pp_get_companies <- function(
   tags = NULL,
   external_id = NULL,
   external_url = NULL,
-  contacts = TRUE,
-  feedbacks = NULL,
+  contacts = FALSE,
+  feedbacks = FALSE,
   page = 1,
   size = 100,
   .limit = size,
@@ -229,7 +229,7 @@ pp_get_companies <- function(
 ) {
   if (size > .limit) size <- .limit
   if (isTRUE(contacts)) contacts <- "true"
-  if (isTRUE(contacts)) contacts <- "true"
+  if (isTRUE(feedbacks)) feedbacks <- "true"
   get_page <- function(page, size) {
     .pp(
       "/companies",
