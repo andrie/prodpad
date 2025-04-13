@@ -116,6 +116,8 @@
 ) {
   # browser()
 
+  # .send_headers <- c(.send_headers, c(`Content-Type` = "application/json"))
+
   if (is.null(.api_url)) {
     .api_url <- switch(
       as.character(.api_version),
@@ -271,7 +273,7 @@ pp_make_request <- function(x) {
     cli::cli_abort("Unknown HTTP verb: {.val {x$method}}")
   }
 
-  raw <- do.call(
+  res <- do.call(
     method_fun,
     compact(list(
       url = x$url,
@@ -281,5 +283,5 @@ pp_make_request <- function(x) {
       x$dest
     ))
   )
-  raw
+  res
 }
