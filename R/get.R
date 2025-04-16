@@ -227,7 +227,8 @@ pp_get_companies <- function(
   page = 1,
   size = 100,
   .limit = size,
-  ...
+  ...,
+  .debug = FALSE
 ) {
   if (size > .limit) size <- .limit
   if (isTRUE(contacts)) contacts <- "true"
@@ -248,8 +249,7 @@ pp_get_companies <- function(
       page = page,
       size = size,
       ... = ...,
-      .unnest_element = "companies",
-      .debug = FALSE
+      .unnest_element = "companies"
     )
   }
   page_all_requests(
