@@ -18,6 +18,7 @@ pp_get_companies(
   page = 1,
   size = 100,
   .limit = size,
+  .debug = FALSE,
   ...
 )
 }

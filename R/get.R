@@ -105,7 +105,7 @@ pp_get_ideas <- function(
   }
 
   # get_one(page = page, size = size, .limit = .limit)
-  page_all_requests(get_one, page = page, size = size, .limit = .limit)
+  page_all_requests(get_one, page = page, size = size, .limit = .limit, ...)
 }
 
 
@@ -249,7 +249,13 @@ pp_get_companies <- function(
       .unnest_element = "companies"
     )
   }
-  page_all_requests(get_page, page = page, size = size, .limit = .limit)
+  page_all_requests(
+    get_page,
+    page = page,
+    size = size,
+    .limit = .limit,
+    .debug = .debug
+  )
 }
 
 
