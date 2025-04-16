@@ -205,6 +205,8 @@ pp_get_idea_feedback <- function(
 #'
 #' @param page The page of results to return (size is always 100).
 #'
+#' @param .debug If TRUE, prints debug messages
+#'
 #' @inherit pp_get_ideas
 #'
 #' @note `GET /companies`
@@ -246,7 +248,8 @@ pp_get_companies <- function(
       page = page,
       size = size,
       ... = ...,
-      .unnest_element = "companies"
+      .unnest_element = "companies",
+      .debug = FALSE
     )
   }
   page_all_requests(

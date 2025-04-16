@@ -18,7 +18,6 @@ pp_get_companies(
   page = 1,
   size = 100,
   .limit = size,
-  .debug = FALSE,
   ...
 )
 }
@@ -50,6 +49,8 @@ pp_get_companies(
 \item{.limit}{The maximum number of elements to return.}
 
 \item{...}{Other arguments passed to \url{.pp()}]}
+
+\item{.debug}{If TRUE, prints debug messages}
 }
 \description{
 Return a list of companies. Companies are a collection of contacts that are providing feedback. Using companies allows you to group feedback from the same organisational source.
